@@ -9,7 +9,7 @@ export const PostSchema = new Schema<IPost>(
   {
     title: { type: String, required: true },
     imageUrl: { type: String },
-  },
+  },  
   { timestamps: true }
 );
 
