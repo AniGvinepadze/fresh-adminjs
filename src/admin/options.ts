@@ -3,6 +3,7 @@ import { Category } from '../model/Category.model.js';
 import { Post } from '../model/Post.model.js';
 import uploadFeature from '@adminjs/upload';
 import componentLoader from './component-loader.js';
+import { Home } from '../model/Home.model.js';
 
 const categoryResourceOptions: ResourceOptions = {
   properties: {
@@ -12,6 +13,14 @@ const categoryResourceOptions: ResourceOptions = {
   },
 };
 const PostResourceOptions: ResourceOptions = {
+  properties: {
+    imageUrl: {
+      isVisible: { list: true, filter: false, show: true, edit: false },
+    },
+  },
+};
+
+const HomeResourceOptions: ResourceOptions = {
   properties: {
     imageUrl: {
       isVisible: { list: true, filter: false, show: true, edit: false },
@@ -74,7 +83,32 @@ const options: AdminJSOptions = {
         }),
       ],
     },
-    
+    {
+      resource: Home,
+      options: HomeResourceOptions,
+      features: [
+        uploadFeature({
+          componentLoader,
+          provider: {
+            aws: {
+              bucket: process.env.AWS_S3_BUCKET!,
+              region: process.env.AWS_REGION!,
+              accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+              secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+            },
+          },
+          properties: {
+            key: 'imageUrl',
+            file: 'uploadImage',
+            mimeType: 'mimeType',
+            bucket: 'bucket',
+            size: 'size',
+            filename: 'filename',
+          },
+          uploadPath: (record, mimeType) => `posts/${record.id()}.${mimeType}`,
+        }),
+      ],
+    },
   ],
 };
 
