@@ -1,6 +1,9 @@
 import mongoose, { Document, model, Schema } from 'mongoose';
 
 const roomsInfoSchema = new Schema({
+  rooms_imageUrl: {
+    type: String,
+  },
   rooms_title_en: {
     type: String,
   },
@@ -28,6 +31,7 @@ const roomsInfoSchema = new Schema({
   rooms_bath: {
     type: Number,
   },
+  
 });
 
 export interface IHome extends Document {
@@ -52,7 +56,8 @@ export interface IHome extends Document {
   home_contact_section_getInTouch_ge?: string;
   home_contact_section_email?: string;
   home_contact_section_phone?: string;
-  imageUrl?: string;
+  hero_imageUrl?: string;
+  pabellon_imageUrl?: string;
 }
 
 const HomeSchema = new Schema<IHome>({
@@ -119,7 +124,10 @@ const HomeSchema = new Schema<IHome>({
   home_contact_section_phone: {
     type: String,
   },
-  imageUrl: { 
+  hero_imageUrl: { 
+    type: String 
+  },
+  pabellon_imageUrl: { 
     type: String 
   },
 });

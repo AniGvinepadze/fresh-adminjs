@@ -33,8 +33,14 @@ const PostResourceOptions: ResourceOptions = {
 
 const HomeResourceOptions: ResourceOptions = {
   properties: {
-    imageUrl: {
+    hero_imageUrl: {
       isVisible: { list: true, filter: false, show: true, edit: false },
+    },
+    pabellon_imageUrl: {
+      isVisible: { list: true, filter: false, show: true, edit: false },
+    },
+     rooms_imageUrl: {
+      isVisible: { list: true, filter: false, show: true, edit: true },
     },
   },
 };
@@ -186,14 +192,60 @@ const options: AdminJSOptions = {
             },
           },
           properties: {
-            key: 'imageUrl',
-            file: 'uploadImage',
-            mimeType: 'mimeType',
-            bucket: 'bucket',
-            size: 'size',
-            filename: 'filename',
+            key: 'hero_imageUrl',
+            file: 'uploadImageHero',
+            mimeType: 'mimeTypeHero',
+            bucket: 'bucketHero',
+            size: 'sizeHero',
+            filename: 'filenameHero',
+            filePath: 'filePathHero',
+            filesToDelete: 'filesToDeleteHero',
           },
-          uploadPath: (record, mimeType) => `images/${record.id()}.${mimeType}`,
+          uploadPath: (record, mimeType) => `images/${record.id()}/hero.${mimeType}`,
+        }),
+        uploadFeature({
+          componentLoader,
+          provider: {
+            aws: {
+              bucket: process.env.AWS_S3_BUCKET!,
+              region: process.env.AWS_REGION!,
+              accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+              secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+            },
+          },
+          properties: {
+            key: 'pabellon_imageUrl',
+            file: 'uploadImagePabellon',
+            mimeType: 'mimeTypePabellon',
+            bucket: 'bucketPabellon',
+            size: 'sizePabellon',
+            filename: 'filenamePabellon',
+            filePath: 'filePathPabellon',
+            filesToDelete: 'filesToDeletePabellon',
+          },
+          uploadPath: (record, mimeType) => `images/${record.id()}/pabellon.${mimeType}`,
+        }),
+         uploadFeature({
+          componentLoader,
+          provider: {
+            aws: {
+              bucket: process.env.AWS_S3_BUCKET!,
+              region: process.env.AWS_REGION!,
+              accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+              secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+            },
+          },
+          properties: {
+            key: 'rooms_imageUrl',
+            file: 'uploadImageRooms',
+            mimeType: 'mimeTypeRooms',
+            bucket: 'bucketRooms',
+            size: 'sizeRooms',
+            filename: 'filenameRooms',
+            filePath: 'filePathRooms',
+            filesToDelete: 'filesToDeleteRooms',
+          },
+          uploadPath: (record, mimeType) => `images/${record.id()}/rooms_image.${mimeType}`,
         }),
       ],
     },
