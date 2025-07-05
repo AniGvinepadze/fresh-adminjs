@@ -4,7 +4,8 @@ import { Post } from '../model/Post.model.js';
 import uploadFeature from '@adminjs/upload';
 import componentLoader from './component-loader.js';
 import { Home } from '../model/Home.model.js';
-import {AboutUs } from '../model/AbouUs.model.js';
+import { AboutUs } from '../model/AbouUs.model.js';
+import { Agro } from '../model/Agro.model.js';
 const categoryResourceOptions: ResourceOptions = {
   properties: {
     imageUrl: {
@@ -28,6 +29,41 @@ const HomeResourceOptions: ResourceOptions = {
   },
 };
 const AboutUsResourceOptions: ResourceOptions = {
+  properties: {
+    imageUrl: {
+      isVisible: { list: true, filter: false, show: true, edit: false },
+    },
+  },
+};
+const AgroResourceOptions: ResourceOptions = {
+  properties: {
+    imageUrl: {
+      isVisible: { list: true, filter: false, show: true, edit: false },
+    },
+  },
+};
+const ServiceResourceOptions: ResourceOptions = {
+  properties: {
+    imageUrl: {
+      isVisible: { list: true, filter: false, show: true, edit: false },
+    },
+  },
+};
+const RestaurantBarResourceOptions: ResourceOptions = {
+  properties: {
+    imageUrl: {
+      isVisible: { list: true, filter: false, show: true, edit: false },
+    },
+  },
+};
+const kidsEntertainmentResourceOptions: ResourceOptions = {
+  properties: {
+    imageUrl: {
+      isVisible: { list: true, filter: false, show: true, edit: false },
+    },
+  },
+};
+const meetingsEventsResourceOptions: ResourceOptions = {
   properties: {
     imageUrl: {
       isVisible: { list: true, filter: false, show: true, edit: false },
@@ -119,6 +155,136 @@ const options: AdminJSOptions = {
     {
       resource: AboutUs,
       options: AboutUsResourceOptions,
+      features: [
+        uploadFeature({
+          componentLoader,
+          provider: {
+            aws: {
+              bucket: process.env.AWS_S3_BUCKET!,
+              region: process.env.AWS_REGION!,
+              accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+              secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+            },
+          },
+          properties: {
+            key: 'imageUrl',
+            file: 'uploadImage',
+            mimeType: 'mimeType',
+            bucket: 'bucket',
+            size: 'size',
+            filename: 'filename',
+          },
+          uploadPath: (record, mimeType) => `images/${record.id()}.${mimeType}`,
+        }),
+      ],
+    },
+     {
+      resource: Agro,
+      options: AgroResourceOptions,
+      features: [
+        uploadFeature({
+          componentLoader,
+          provider: {
+            aws: {
+              bucket: process.env.AWS_S3_BUCKET!,
+              region: process.env.AWS_REGION!,
+              accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+              secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+            },
+          },
+          properties: {
+            key: 'imageUrl',
+            file: 'uploadImage',
+            mimeType: 'mimeType',
+            bucket: 'bucket',
+            size: 'size',
+            filename: 'filename',
+          },
+          uploadPath: (record, mimeType) => `images/${record.id()}.${mimeType}`,
+        }),
+      ],
+    },
+     {
+      resource: AboutUs,
+      options: ServiceResourceOptions,
+      features: [
+        uploadFeature({
+          componentLoader,
+          provider: {
+            aws: {
+              bucket: process.env.AWS_S3_BUCKET!,
+              region: process.env.AWS_REGION!,
+              accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+              secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+            },
+          },
+          properties: {
+            key: 'imageUrl',
+            file: 'uploadImage',
+            mimeType: 'mimeType',
+            bucket: 'bucket',
+            size: 'size',
+            filename: 'filename',
+          },
+          uploadPath: (record, mimeType) => `images/${record.id()}.${mimeType}`,
+        }),
+      ],
+    },
+     {
+      resource: AboutUs,
+      options: RestaurantBarResourceOptions,
+      features: [
+        uploadFeature({
+          componentLoader,
+          provider: {
+            aws: {
+              bucket: process.env.AWS_S3_BUCKET!,
+              region: process.env.AWS_REGION!,
+              accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+              secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+            },
+          },
+          properties: {
+            key: 'imageUrl',
+            file: 'uploadImage',
+            mimeType: 'mimeType',
+            bucket: 'bucket',
+            size: 'size',
+            filename: 'filename',
+          },
+          uploadPath: (record, mimeType) => `images/${record.id()}.${mimeType}`,
+        }),
+      ],
+    },
+     {
+      resource: AboutUs,
+      options: kidsEntertainmentResourceOptions,
+      features: [
+        uploadFeature({
+          componentLoader,
+          provider: {
+            aws: {
+              bucket: process.env.AWS_S3_BUCKET!,
+              region: process.env.AWS_REGION!,
+              accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+              secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+            },
+          },
+          properties: {
+            key: 'imageUrl',
+            file: 'uploadImage',
+            mimeType: 'mimeType',
+            bucket: 'bucket',
+            size: 'size',
+            filename: 'filename',
+          },
+          uploadPath: (record, mimeType) => `images/${record.id()}.${mimeType}`,
+        }),
+      ],
+    },
+     {
+      resource: AboutUs,
+      options: meetingsEventsResourceOptions,
       features: [
         uploadFeature({
           componentLoader,

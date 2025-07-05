@@ -50,7 +50,7 @@ export interface IHome extends Document {
   home_rooms_section_title_ge: string;
   home_rooms_section_little_description_en: string;
   home_rooms_section_little_description_ge: string;
-  home_rooms: Array<typeof roomsInfoSchema>; 
+  home_rooms: Array<typeof roomsInfoSchema>;
   home_big_description_en: string;
   home_big_description_ge: string;
   home_contact_section_title_en: string;
