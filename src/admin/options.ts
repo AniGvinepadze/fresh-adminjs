@@ -17,6 +17,8 @@ import { Contact } from '../model/Contact.model.js';
 import { Rooms } from '../model/rooms.model.js';
 import { Wine } from '../model/winee.model.js';
 import { HomeRooms } from '../model/HomeRooms.model.js';
+import { KidsEntertainmentImage } from '../model/KidsEntertainmentImages.model.js';
+
 const categoryResourceOptions: ResourceOptions = {
   properties: {
     imageUrl: {
@@ -125,6 +127,22 @@ const WineEventsResourceOptions: ResourceOptions = {
 const HomeRoomsResourceOptions: ResourceOptions = {
   properties: {
     imageUrl: {
+      isVisible: { list: true, filter: false, show: true, edit: false },
+    },
+  },
+};
+const KidsEntertainmentImagesResourceOptions: ResourceOptions = {
+  properties: {
+    imageUrl: {
+      isVisible: { list: true, filter: false, show: true, edit: false },
+    },
+    secondImageUrl: {
+      isVisible: { list: true, filter: false, show: true, edit: false },
+    },
+    thirdImageUrl: {
+      isVisible: { list: true, filter: false, show: true, edit: false },
+    },
+    fourthImageUrl: {
       isVisible: { list: true, filter: false, show: true, edit: false },
     },
   },
@@ -566,6 +584,100 @@ const options: AdminJSOptions = {
             filename: 'filename',
           },
           uploadPath: (record, mimeType) => `images/${record.id()}.${mimeType}`,
+        }),
+      ],
+    },
+    {
+      resource: KidsEntertainmentImage,
+      options: KidsEntertainmentImagesResourceOptions,
+      features: [
+        uploadFeature({
+          componentLoader,
+          provider: {
+            aws: {
+              bucket: process.env.AWS_S3_BUCKET!,
+              region: process.env.AWS_REGION!,
+              accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+              secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+            },
+          },
+          properties: {
+            key: 'imageUrl',
+            file: 'uploadImage',
+            mimeType: 'mimeType',
+            bucket: 'bucket',
+            size: 'size',
+            filename: 'filename',
+            filePath: 'firstImagePath',
+            filesToDelete: 'firstImageDelete',
+          },
+          uploadPath: (record, mimeType) => `images/${record.id()}/first.${mimeType}`,
+        }),
+        uploadFeature({
+          componentLoader,
+          provider: {
+            aws: {
+              bucket: process.env.AWS_S3_BUCKET!,
+              region: process.env.AWS_REGION!,
+              accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+              secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+            },
+          },
+          properties: {
+            key: 'secondImageUrl',
+            file: 'uploadImageSecond',
+            mimeType: 'mimeTypeSecond',
+            bucket: 'bucketSecond',
+            size: 'sizeSecond',
+            filename: 'filenameSecond',
+            filePath: 'secondImagePath',
+            filesToDelete: 'secondImageDelete',
+          },
+          uploadPath: (record, mimeType) => `images/${record.id()}/second.${mimeType}`,
+        }),
+        uploadFeature({
+          componentLoader,
+          provider: {
+            aws: {
+              bucket: process.env.AWS_S3_BUCKET!,
+              region: process.env.AWS_REGION!,
+              accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+              secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+            },
+          },
+          properties: {
+            key: 'thirdImageUrl',
+            file: 'uploadImageThird',
+            mimeType: 'mimeTypeThird',
+            bucket: 'bucketThird',
+            size: 'sizeThird',
+            filename: 'filenameThird',
+            filePath: 'thirdImagePath',
+            filesToDelete: 'thirdImageDelete',
+          },
+          uploadPath: (record, mimeType) => `images/${record.id()}/third.${mimeType}`,
+        }),
+        uploadFeature({
+          componentLoader,
+          provider: {
+            aws: {
+              bucket: process.env.AWS_S3_BUCKET!,
+              region: process.env.AWS_REGION!,
+              accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+              secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+            },
+          },
+          properties: {
+            key: 'fourthImageUrl',
+            file: 'uploadImageFourth',
+            mimeType: 'mimeTypeFourth',
+            bucket: 'bucketFourth',
+            size: 'sizeFourth',
+            filename: 'filenameFourth',
+            filePath: 'fourthImagePath',
+            filesToDelete: 'fourthImageDelete',
+          },
+          uploadPath: (record, mimeType) => `images/${record.id()}/fourth.${mimeType}`,
         }),
       ],
     },
