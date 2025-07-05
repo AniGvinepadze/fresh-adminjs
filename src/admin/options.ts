@@ -16,6 +16,7 @@ import { Blog } from '../model/Blog.model.js';
 import { Contact } from '../model/Contact.model.js';
 import { Rooms } from '../model/rooms.model.js';
 import { Wine } from '../model/winee.model.js';
+import { HomeRooms } from '../model/HomeRooms.model.js';
 const categoryResourceOptions: ResourceOptions = {
   properties: {
     imageUrl: {
@@ -39,9 +40,9 @@ const HomeResourceOptions: ResourceOptions = {
     pabellon_imageUrl: {
       isVisible: { list: true, filter: false, show: true, edit: false },
     },
-     rooms_imageUrl: {
-      isVisible: { list: true, filter: false, show: true, edit: true },
-    },
+    // rooms_imageUrl: {
+    //   isVisible: { list: true, filter: false, show: true, edit: true },
+    // },
   },
 };
 const AboutUsResourceOptions: ResourceOptions = {
@@ -115,6 +116,13 @@ const RoomsResourceOptions: ResourceOptions = {
   },
 };
 const WineEventsResourceOptions: ResourceOptions = {
+  properties: {
+    imageUrl: {
+      isVisible: { list: true, filter: false, show: true, edit: false },
+    },
+  },
+};
+const HomeRoomsResourceOptions: ResourceOptions = {
   properties: {
     imageUrl: {
       isVisible: { list: true, filter: false, show: true, edit: false },
@@ -225,7 +233,7 @@ const options: AdminJSOptions = {
           },
           uploadPath: (record, mimeType) => `images/${record.id()}/pabellon.${mimeType}`,
         }),
-         uploadFeature({
+        uploadFeature({
           componentLoader,
           provider: {
             aws: {
@@ -512,6 +520,32 @@ const options: AdminJSOptions = {
     {
       resource: Wine,
       options: WineEventsResourceOptions,
+      features: [
+        uploadFeature({
+          componentLoader,
+          provider: {
+            aws: {
+              bucket: process.env.AWS_S3_BUCKET!,
+              region: process.env.AWS_REGION!,
+              accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+              secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+            },
+          },
+          properties: {
+            key: 'imageUrl',
+            file: 'uploadImage',
+            mimeType: 'mimeType',
+            bucket: 'bucket',
+            size: 'size',
+            filename: 'filename',
+          },
+          uploadPath: (record, mimeType) => `images/${record.id()}.${mimeType}`,
+        }),
+      ],
+    },
+    {
+      resource: HomeRooms,
+      options: HomeRoomsResourceOptions,
       features: [
         uploadFeature({
           componentLoader,
