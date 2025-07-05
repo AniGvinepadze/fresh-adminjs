@@ -50,7 +50,7 @@ export interface IHome extends Document {
   home_rooms_section_title_ge: string;
   home_rooms_section_little_description_en: string;
   home_rooms_section_little_description_ge: string;
-  home_rooms: Array<typeof roomsInfoSchema>; // Fix here: Array of roomsInfoSchema
+  home_rooms: Array<typeof roomsInfoSchema>; 
   home_big_description_en: string;
   home_big_description_ge: string;
   home_contact_section_title_en: string;
@@ -106,7 +106,7 @@ const HomeSchema = new Schema<IHome>({
     required: true,
   },
   home_rooms: {
-    type: [roomsInfoSchema], // Define it as an array of roomsInfoSchema
+    type: [roomsInfoSchema],
     required: true,
   },
   home_big_description_en: {
