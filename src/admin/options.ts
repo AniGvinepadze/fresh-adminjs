@@ -6,6 +6,7 @@ import componentLoader from './component-loader.js';
 import { Home } from '../model/Home.model.js';
 import { AboutUs } from '../model/AbouUs.model.js';
 import { Agro } from '../model/Agro.model.js';
+import { RestaurantBar } from "../model/RestaurantBar.model.js"
 const categoryResourceOptions: ResourceOptions = {
   properties: {
     imageUrl: {
@@ -231,7 +232,7 @@ const options: AdminJSOptions = {
       ],
     },
      {
-      resource: AboutUs,
+      resource: RestaurantBar,
       options: RestaurantBarResourceOptions,
       features: [
         uploadFeature({
