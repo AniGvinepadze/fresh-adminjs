@@ -10,7 +10,12 @@ import { RestaurantBar } from '../model/RestaurantBar.model.js';
 import { Services } from '../model/Service.model.js';
 import { KidsEntertainment } from '../model/KidsEntertainment.model.js';
 import { MeetingsEvent } from '../model/MeetingEvent.model.js';
+import { SpaWellness } from '../model/SpaWellnes.mode.js';
+import { Blog } from '../model/Blog.model.js';
 
+import { Contact } from '../model/Contact.model.js';
+import { Rooms } from '../model/rooms.model.js';
+import { Wine } from '../model/winee.model.js';
 const categoryResourceOptions: ResourceOptions = {
   properties: {
     imageUrl: {
@@ -69,6 +74,41 @@ const kidsEntertainmentResourceOptions: ResourceOptions = {
   },
 };
 const meetingsEventsResourceOptions: ResourceOptions = {
+  properties: {
+    imageUrl: {
+      isVisible: { list: true, filter: false, show: true, edit: false },
+    },
+  },
+};
+const SpaWellnesResourceOptions: ResourceOptions = {
+  properties: {
+    imageUrl: {
+      isVisible: { list: true, filter: false, show: true, edit: false },
+    },
+  },
+};
+const BlogsEventsResourceOptions: ResourceOptions = {
+  properties: {
+    imageUrl: {
+      isVisible: { list: true, filter: false, show: true, edit: false },
+    },
+  },
+};
+const ContactsResourceOptions: ResourceOptions = {
+  properties: {
+    imageUrl: {
+      isVisible: { list: true, filter: false, show: true, edit: false },
+    },
+  },
+};
+const RoomsResourceOptions: ResourceOptions = {
+  properties: {
+    imageUrl: {
+      isVisible: { list: true, filter: false, show: true, edit: false },
+    },
+  },
+};
+const WineEventsResourceOptions: ResourceOptions = {
   properties: {
     imageUrl: {
       isVisible: { list: true, filter: false, show: true, edit: false },
@@ -290,6 +330,136 @@ const options: AdminJSOptions = {
     {
       resource: MeetingsEvent,
       options: meetingsEventsResourceOptions,
+      features: [
+        uploadFeature({
+          componentLoader,
+          provider: {
+            aws: {
+              bucket: process.env.AWS_S3_BUCKET!,
+              region: process.env.AWS_REGION!,
+              accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+              secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+            },
+          },
+          properties: {
+            key: 'imageUrl',
+            file: 'uploadImage',
+            mimeType: 'mimeType',
+            bucket: 'bucket',
+            size: 'size',
+            filename: 'filename',
+          },
+          uploadPath: (record, mimeType) => `images/${record.id()}.${mimeType}`,
+        }),
+      ],
+    },
+    {
+      resource: SpaWellness,
+      options: SpaWellnesResourceOptions,
+      features: [
+        uploadFeature({
+          componentLoader,
+          provider: {
+            aws: {
+              bucket: process.env.AWS_S3_BUCKET!,
+              region: process.env.AWS_REGION!,
+              accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+              secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+            },
+          },
+          properties: {
+            key: 'imageUrl',
+            file: 'uploadImage',
+            mimeType: 'mimeType',
+            bucket: 'bucket',
+            size: 'size',
+            filename: 'filename',
+          },
+          uploadPath: (record, mimeType) => `images/${record.id()}.${mimeType}`,
+        }),
+      ],
+    },
+    {
+      resource: Blog,
+      options: BlogsEventsResourceOptions,
+      features: [
+        uploadFeature({
+          componentLoader,
+          provider: {
+            aws: {
+              bucket: process.env.AWS_S3_BUCKET!,
+              region: process.env.AWS_REGION!,
+              accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+              secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+            },
+          },
+          properties: {
+            key: 'imageUrl',
+            file: 'uploadImage',
+            mimeType: 'mimeType',
+            bucket: 'bucket',
+            size: 'size',
+            filename: 'filename',
+          },
+          uploadPath: (record, mimeType) => `images/${record.id()}.${mimeType}`,
+        }),
+      ],
+    },
+    {
+      resource: Contact,
+      options: ContactsResourceOptions,
+      features: [
+        uploadFeature({
+          componentLoader,
+          provider: {
+            aws: {
+              bucket: process.env.AWS_S3_BUCKET!,
+              region: process.env.AWS_REGION!,
+              accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+              secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+            },
+          },
+          properties: {
+            key: 'imageUrl',
+            file: 'uploadImage',
+            mimeType: 'mimeType',
+            bucket: 'bucket',
+            size: 'size',
+            filename: 'filename',
+          },
+          uploadPath: (record, mimeType) => `images/${record.id()}.${mimeType}`,
+        }),
+      ],
+    },
+    {
+      resource: Rooms,
+      options: RoomsResourceOptions,
+      features: [
+        uploadFeature({
+          componentLoader,
+          provider: {
+            aws: {
+              bucket: process.env.AWS_S3_BUCKET!,
+              region: process.env.AWS_REGION!,
+              accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+              secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+            },
+          },
+          properties: {
+            key: 'imageUrl',
+            file: 'uploadImage',
+            mimeType: 'mimeType',
+            bucket: 'bucket',
+            size: 'size',
+            filename: 'filename',
+          },
+          uploadPath: (record, mimeType) => `images/${record.id()}.${mimeType}`,
+        }),
+      ],
+    },
+    {
+      resource: Wine,
+      options: WineEventsResourceOptions,
       features: [
         uploadFeature({
           componentLoader,
