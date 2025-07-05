@@ -6,7 +6,11 @@ import componentLoader from './component-loader.js';
 import { Home } from '../model/Home.model.js';
 import { AboutUs } from '../model/AbouUs.model.js';
 import { Agro } from '../model/Agro.model.js';
-import { RestaurantBar } from "../model/RestaurantBar.model.js"
+import { RestaurantBar } from '../model/RestaurantBar.model.js';
+import { Services } from '../model/Service.model.js';
+import { KidsEntertainment } from '../model/KidsEntertainment.model.js';
+import { MeetingsEvent } from '../model/MeetingEvent.model.js';
+
 const categoryResourceOptions: ResourceOptions = {
   properties: {
     imageUrl: {
@@ -179,7 +183,7 @@ const options: AdminJSOptions = {
         }),
       ],
     },
-     {
+    {
       resource: Agro,
       options: AgroResourceOptions,
       features: [
@@ -205,8 +209,8 @@ const options: AdminJSOptions = {
         }),
       ],
     },
-     {
-      resource: AboutUs,
+    {
+      resource: Services,
       options: ServiceResourceOptions,
       features: [
         uploadFeature({
@@ -231,7 +235,7 @@ const options: AdminJSOptions = {
         }),
       ],
     },
-     {
+    {
       resource: RestaurantBar,
       options: RestaurantBarResourceOptions,
       features: [
@@ -257,8 +261,8 @@ const options: AdminJSOptions = {
         }),
       ],
     },
-     {
-      resource: AboutUs,
+    {
+      resource: KidsEntertainment,
       options: kidsEntertainmentResourceOptions,
       features: [
         uploadFeature({
@@ -283,8 +287,8 @@ const options: AdminJSOptions = {
         }),
       ],
     },
-     {
-      resource: AboutUs,
+    {
+      resource: MeetingsEvent,
       options: meetingsEventsResourceOptions,
       features: [
         uploadFeature({
