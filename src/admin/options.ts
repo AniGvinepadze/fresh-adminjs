@@ -69,7 +69,20 @@ const AgroResourceOptions: ResourceOptions = {
 };
 const ServiceResourceOptions: ResourceOptions = {
   properties: {
-    imageUrl: {
+      restaurantImageUrl: {
+
+      isVisible: { list: true, filter: false, show: true, edit: false },
+    },
+    barImageUrl: {
+      isVisible: { list: true, filter: false, show: true, edit: false },
+    },
+    meetingsAndEventsImageUrl: {
+      isVisible: { list: true, filter: false, show: true, edit: false },
+    },
+    wellnessAndFitnessImageUrl: {
+      isVisible: { list: true, filter: false, show: true, edit: false },
+    },
+    kidsEntertainmentImageUrl: {
       isVisible: { list: true, filter: false, show: true, edit: false },
     },
   },
@@ -421,14 +434,104 @@ const options: AdminJSOptions = {
             },
           },
           properties: {
-            key: 'imageUrl',
-            file: 'uploadImage',
-            mimeType: 'mimeType',
-            bucket: 'bucket',
-            size: 'size',
-            filename: 'filename',
+             key: 'restaurantImageUrl',
+            file: 'uploadImageRestaurant',
+            mimeType: 'mimeTypeRestaurant',
+            bucket: 'bucketRestaurant',
+            size: 'sizeRestaurant',
+            filename: 'filenameRestaurant',
+            filePath: 'filePathRestaurant',
+            filesToDelete: 'filesToDeleteRestaurant',
           },
-          uploadPath: (record, mimeType) => `images/${record.id()}.${mimeType}`,
+          uploadPath: (record, mimeType) => `images/${record.id()}/restaurannt.${mimeType}`,
+        }),
+         uploadFeature({
+          componentLoader,
+          provider: {
+            aws: {
+              bucket: process.env.AWS_S3_BUCKET!,
+              region: process.env.AWS_REGION!,
+              accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+              secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+            },
+          },
+          properties: {
+             key: 'restaurantImageUrl',
+            file: 'uploadImageRestaurant',
+            mimeType: 'mimeTypeRestaurant',
+            bucket: 'bucketRestaurant',
+            size: 'sizeRestaurant',
+            filename: 'filenameRestaurant',
+            filePath: 'filePathRestaurant',
+            filesToDelete: 'filesToDeleteRestaurant',
+          },
+          uploadPath: (record, mimeType) => `images/${record.id()}/restaurannt.${mimeType}`,
+        }),
+         uploadFeature({
+          componentLoader,
+          provider: {
+            aws: {
+              bucket: process.env.AWS_S3_BUCKET!,
+              region: process.env.AWS_REGION!,
+              accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+              secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+            },
+          },
+          properties: {
+             key: ' meetingsAndEventsImageUrl',
+            file: 'uploadImageMeetingsAndEvents',
+            mimeType: 'mimeTypeMeetingsAndEvents',
+            bucket: 'bucketMeetingsAndEvents',
+            size: 'sizeMeetingsAndEvents',
+            filename: 'filenameMeetingsAndEvents',
+            filePath: 'filePathMeetingsAndEvents',
+            filesToDelete: 'filesToDeletemeetingsAndEvents',
+          },
+          uploadPath: (record, mimeType) => `images/${record.id()}/meetingsAndEvents.${mimeType}`,
+        }),
+         uploadFeature({
+          componentLoader,
+          provider: {
+            aws: {
+              bucket: process.env.AWS_S3_BUCKET!,
+              region: process.env.AWS_REGION!,
+              accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+              secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+            },
+          },
+          properties: {
+             key: 'wellnessAndFitnessImageUrl',
+            file: 'uploadImageWellnessAndFitness',
+            mimeType: 'mimeTypeWellnessAndFitness',
+            bucket: 'bucketWellnessAndFitness',
+            size: 'sizeWellnessAndFitness',
+            filename: 'filenameWellnessAndFitness',
+            filePath: 'filePathWellnessAndFitness',
+            filesToDelete: 'filesToDeleteWellnessAndFitness',
+          },
+          uploadPath: (record, mimeType) => `images/${record.id()}/WellnessAndFitness.${mimeType}`,
+        }),
+         uploadFeature({
+          componentLoader,
+          provider: {
+            aws: {
+              bucket: process.env.AWS_S3_BUCKET!,
+              region: process.env.AWS_REGION!,
+              accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+              secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+            },
+          },
+          properties: {
+             key: 'kidsEntertainmentImageUrl',
+            file: 'uploadImageKidsEntertainmentImageUrl',
+            mimeType: 'mimeTypeKidsEntertainmentImageUrl',
+            bucket: 'bucketKidsEntertainmentImageUrl',
+            size: 'sizeKidsEntertainmentImageUrl',
+            filename: 'filenameKidsEntertainmentImageUrl',
+            filePath: 'filePathKidsEntertainmentImageUrl',
+            filesToDelete: 'filesToDeleteKidsEntertainmentImageUrl',
+          },
+          uploadPath: (record, mimeType) => `images/${record.id()}/kidsEntertainmentImageUrl.${mimeType}`,
         }),
       ],
     },
