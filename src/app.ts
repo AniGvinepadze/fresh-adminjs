@@ -1,23 +1,34 @@
 import express from 'express';
 import AdminJS from 'adminjs';
 import { buildAuthenticatedRouter } from '@adminjs/express';
-
+import cors from 'cors';
 import provider from './admin/auth-provider.js';
 import options from './admin/options.js';
 import initializeDb from './db/index.js';
 import * as AdminJSMongoose from '@adminjs/mongoose';
+import apiRouter from './route/api.js';
 
 AdminJS.registerAdapter({
   Resource: AdminJSMongoose.Resource,
   Database: AdminJSMongoose.Database,
 });
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
+
+
 
 const start = async () => {
   const app = express();
 
   await initializeDb();
+  app.use(express.json());
+  app.use(express.urlencoded({ extended: true }));
+  const corsOptions = {
+    origin: ['http://localhost:3000'],
+    credentials: true,
+  };
+  app.use(cors(corsOptions));
+  app.use('/api', apiRouter);
 
   const admin = new AdminJS(options);
 
@@ -39,11 +50,10 @@ const start = async () => {
       secret: process.env.COOKIE_SECRET,
       saveUninitialized: true,
       resave: true,
-    },
+    }
   );
 
   app.use(admin.options.rootPath, router);
-
   app.listen(port, () => {
     console.log(`AdminJS available at http://localhost:${port}${admin.options.rootPath}`);
   });
