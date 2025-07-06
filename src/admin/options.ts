@@ -22,8 +22,6 @@ import { MakrinetImage } from '../model/MakrineImages.model.js';
 import { MeetingImage } from '../model/MeetingsImages.js';
 import { AgroImages } from '../model/AgroImages.model.js';
 
-
-
 const categoryResourceOptions: ResourceOptions = {
   properties: {
     imageUrl: {
@@ -55,6 +53,9 @@ const HomeResourceOptions: ResourceOptions = {
 const AboutUsResourceOptions: ResourceOptions = {
   properties: {
     imageUrl: {
+      isVisible: { list: true, filter: false, show: true, edit: false },
+    },
+    iliaImageUrl: {
       isVisible: { list: true, filter: false, show: true, edit: false },
     },
   },
@@ -350,8 +351,32 @@ const options: AdminJSOptions = {
             bucket: 'bucket',
             size: 'size',
             filename: 'filename',
+            filePath: 'filePath',
+            filesToDelete: 'filesToDelete',
           },
           uploadPath: (record, mimeType) => `images/${record.id()}.${mimeType}`,
+        }),
+        uploadFeature({
+          componentLoader,
+          provider: {
+            aws: {
+              bucket: process.env.AWS_S3_BUCKET!,
+              region: process.env.AWS_REGION!,
+              accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+              secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+            },
+          },
+          properties: {
+            key: 'iliaImageUrl',
+            file: 'uploadImageIlia',
+            mimeType: 'mimeTypeIlia',
+            bucket: 'bucketIlia',
+            size: 'sizeIlia',
+            filename: 'filenameIlia',
+            filePath: 'filePathIlia',
+            filesToDelete: 'filesToDeleteIlia',
+          },
+          uploadPath: (record, mimeType) => `images/${record.id()}/ilia.${mimeType}`,
         }),
       ],
     },
