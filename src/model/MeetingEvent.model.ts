@@ -15,7 +15,9 @@ export interface MeetingsEvent extends Document {
   conference_rooms_section_description_ge?: string;
   conference_rooms_section_little_description_en?: string;
   conference_rooms_section_little_description_ge?: string;
-  imageUrl?: string;
+  conferenceImageUrl?: string;
+  artWorkImageUrl?: string;
+  conferenceRoomsImageUrl?: string;
 }
 
 export const MeetingsEventSchema = new Schema<MeetingsEvent>({
@@ -61,7 +63,13 @@ export const MeetingsEventSchema = new Schema<MeetingsEvent>({
   conference_rooms_section_little_description_ge: {
     type: String,
   },
-  imageUrl: {
+  conferenceImageUrl: {
+    type: String,
+  },
+  artWorkImageUrl: {
+    type: String,
+  },
+  conferenceRoomsImageUrl: {
     type: String,
   },
 });

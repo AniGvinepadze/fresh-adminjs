@@ -103,7 +103,14 @@ const kidsEntertainmentResourceOptions: ResourceOptions = {
 };
 const meetingsEventsResourceOptions: ResourceOptions = {
   properties: {
-    imageUrl: {
+    conferenceImageUrl: {
+      isVisible: { list: true, filter: false, show: true, edit: false },
+    },
+
+    artWorkImageUrl: {
+      isVisible: { list: true, filter: false, show: true, edit: false },
+    },    
+    conferenceRoomsImageUrl: {
       isVisible: { list: true, filter: false, show: true, edit: false },
     },
   },
@@ -602,14 +609,60 @@ const options: AdminJSOptions = {
             },
           },
           properties: {
-            key: 'imageUrl',
-            file: 'uploadImage',
-            mimeType: 'mimeType',
-            bucket: 'bucket',
-            size: 'size',
-            filename: 'filename',
+            key: 'conferenceImageUrl',
+            file: 'uploadImageConference',
+            mimeType: 'mimeTypeConference',
+            bucket: 'bucketConference',
+            size: 'sizeConference',
+            filename: 'filenameConference',
+            filePath: 'conferenceImagePath ',
+            filesToDelete: 'conferenceImageDelete',
           },
-          uploadPath: (record, mimeType) => `images/${record.id()}.${mimeType}`,
+          uploadPath: (record, mimeType) => `images/${record.id()}/conference.${mimeType}`,
+        }),
+        uploadFeature({
+          componentLoader,
+          provider: {
+            aws: {
+              bucket: process.env.AWS_S3_BUCKET!,
+              region: process.env.AWS_REGION!,
+              accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+              secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+            },
+          },
+          properties: {
+            key: 'artWorkImageUrl',
+            file: 'uploadImageArtWork',
+            mimeType: 'mimeTypeArtWork',
+            bucket: 'bucketArtWork',
+            size: 'sizeArtWork',
+            filename: 'filenameArtWork',
+            filePath: 'artWorkImagePath',
+            filesToDelete: 'artWorkImageImageDelete',
+          },
+          uploadPath: (record, mimeType) => `images/${record.id()}/arwork.${mimeType}`,
+        }),
+   uploadFeature({
+          componentLoader,
+          provider: {
+            aws: {
+              bucket: process.env.AWS_S3_BUCKET!,
+              region: process.env.AWS_REGION!,
+              accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+              secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+            },
+          },
+          properties: {
+            key: '  conferenceRoomsImageUrl',
+            file: 'uploadImageConferenceRooms',
+            mimeType: 'mimeTypeConferenceRooms',
+            bucket: 'bucketConferenceRooms',
+            size: 'sizeConferenceRooms',
+            filename: 'filenameConferenceRooms',
+            filePath: 'conferenceRoomsImagePath',
+            filesToDelete: 'conferenceRoomsImageDelete',
+          },
+          uploadPath: (record, mimeType) => `images/${record.id()}/conferenceRooms.${mimeType}`,
         }),
       ],
     },
