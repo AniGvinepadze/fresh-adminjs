@@ -12,6 +12,7 @@ export interface Agro extends Document {
   culinary_description_en?: string;
   culinary_description_ge?: string;
   imageUrl?: string;
+  walnut_imageUrl?: string;
 }
 
 export const AgroSchema = new Schema<Agro>({
@@ -46,6 +47,9 @@ export const AgroSchema = new Schema<Agro>({
     type: String,
   },
   imageUrl: {
+    type: String,
+  },
+  walnut_imageUrl: {
     type: String,
   },
 });

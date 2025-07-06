@@ -65,6 +65,9 @@ const AgroResourceOptions: ResourceOptions = {
     imageUrl: {
       isVisible: { list: true, filter: false, show: true, edit: false },
     },
+    walnut_imageUrl: {
+      isVisible: { list: true, filter: false, show: true, edit: false },
+    },
   },
 };
 const ServiceResourceOptions: ResourceOptions = {
@@ -421,8 +424,34 @@ const options: AdminJSOptions = {
             bucket: 'bucket',
             size: 'size',
             filename: 'filename',
+               filePath: 'filePath',
+            filesToDelete: 'filesToDelete',
           },
-          uploadPath: (record, mimeType) => `images/${record.id()}.${mimeType}`,
+          
+          uploadPath: (record, mimeType) => `images/${record.id()}/image.${mimeType}`,
+        }),
+          uploadFeature({
+          componentLoader,
+          provider: {
+            aws: {
+              bucket: process.env.AWS_S3_BUCKET!,
+              region: process.env.AWS_REGION!,
+              accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+              secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+            },
+          },
+          properties: {
+            key: 'agroImageUrl',
+            file: 'uploadImageAgro',
+            mimeType: 'mimeTypeAgro',
+            bucket: 'bucketAgro',
+            size: 'sizeAgro',
+            filename: 'filenameAgro',
+               filePath: 'AgroPath',
+            filesToDelete: 'AgroDelete',
+          },
+          
+          uploadPath: (record, mimeType) => `images/${record.id()}/agro.${mimeType}`,
         }),
       ],
     },
