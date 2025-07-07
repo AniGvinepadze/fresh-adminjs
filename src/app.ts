@@ -22,7 +22,7 @@ const start = async () => {
 
   // Set up CORS
   const corsOptions = {
-    origin: ['http://localhost:3000'],
+    origin: ['http://localhost:3000', 'https://www.pabellon.ge/'],
     credentials: true,
   };
   app.use(cors(corsOptions));
