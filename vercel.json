@@ -1,9 +1,9 @@
 {
     "version": 2,
     "builds": [
-      { "src": "pabelon/src/app.ts", "use": "@vercel/node" }
+      { "src": "dist/app.js", "use": "@vercel/node" }
     ],
     "routes": [
-      { "src": "/(.*)", "dest": "pabelon/src/app.ts" }
+      { "src": "/(.*)", "dest": "dist/app.js" }
     ]
   }
