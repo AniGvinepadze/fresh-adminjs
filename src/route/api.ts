@@ -197,13 +197,13 @@ apiRouter.get('/kids-entertainmentimgs', async (req, res) => {
   const language = lang === 'ge' ? 'ge' : 'en';
   try {
     const kidsEntertainment = await KidsEntertainmentImage.find({}).lean();
-    // const responseData = {
-    //   imageUrl: kidsEntertainment.imageUrl,
-    //   secondImageUrl: kidsEntertainment.secondImageUrl,
-    //   thirdImageUrl: kidsEntertainment.thirdImageUrl,
-    //   fourthImageUrl: kidsEntertainment.fourthImageUrl,
-    // }
-    res.json(kidsEntertainment);
+    const responseData = {
+      imageUrl: kidsEntertainment['imageUrl'],
+      secondImageUrl: kidsEntertainment['secondImageUrl'],
+    thirdImageUrl: kidsEntertainment['thirdImageUrl'],
+      fourthImageUrl: kidsEntertainment['fourthImageUrl'],
+    }
+    res.json(responseData);
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch kids entertainment data' });
   }
