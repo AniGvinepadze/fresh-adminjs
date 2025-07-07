@@ -16,171 +16,143 @@ import { Wine } from '../model/winee.model.js';
 
 const apiRouter = express.Router();
 
-// // Categories
-// router.get('/categories', async (req, res) => {
-//   try {
-//     const categories = await Category.find({}).lean();
-//     res.json(categories);
-//   } catch (error) {
-//     res.status(500).json({ error: 'Failed to fetch categories' });
-//   }
-// });
-
-// router.get('/categories/:id', async (req, res) => {
-//   try {
-//     const category = await Category.findById(req.params.id).lean();
-//     if (!category) {
-//       return res.status(404).json({ error: 'Category not found' });
-//     }
-//     res.json(category);
-//   } catch (error) {
-//     res.status(500).json({ error: 'Failed to fetch category' });
-//   }
-// });
-
-// // Posts
-// router.get('/posts', async (req, res) => {
-//   try {
-//     const posts = await Post.find({}).lean();
-//     res.json(posts);
-//   } catch (error) {
-//     res.status(500).json({ error: 'Failed to fetch posts' });
-//   }
-// });
-
-// router.get('/posts/:id', async (req, res) => {
-//   try {
-//     const post = await Post.findById(req.params.id).lean();
-//     if (!post) {
-//       return res.status(404).json({ error: 'Post not found' });
-//     }
-//     res.json(post);
-//   } catch (error) {
-//     res.status(500).json({ error: 'Failed to fetch post' });
-//   }
-// });
-
-// // Home
-// router.get('/home', async (req, res) => {
-//   try {
-//     const home = await Home.findOne({}).lean();
-//     res.json(home);
-//   } catch (error) {
-//     res.status(500).json({ error: 'Failed to fetch home data' });
-//   }
-// });
-
-// // About Us
-apiRouter.get('/aboutUs', async (req, res) => {
+apiRouter.get('/home', async (req, res) => {
+  const { lang } = req.query;
+  const language = lang === 'ge' ? 'ge' : 'en';
+  console.log(language);
   try {
-    const aboutUs = await AboutUs.findOne({}).lean();
-    res.json(aboutUs);
+    const home = await Home.findOne({}).lean();
+    console.log(home);
+
+    // const responseData = {
+    //   aboutus_experience_overview: aboutUs[`aboutus_experience_overview_${language}`],
+    //   aboutus_facilities_and_services: aboutUs[`aboutus_facilities_and_services_${language}`],
+    //   aboutus_wine_collections_and_story: aboutUs[`aboutus_wine_collections_and_story_${language}`],
+    //   aboutus_historical_culture_heritage: aboutUs[`aboutus_historical_culture_heritage_${language}`],
+    //   aboutus_family_tradition: aboutUs[`aboutus_family_tradition_${language}`],
+    //   aboutus_farmToTable_experience: aboutUs[`aboutus_farmToTable_experience_${language}`],
+    // };
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: 'Failed to fetch about us data' });
   }
 });
-apiRouter.get('/health', (req, res) => {
-  res.json({ status: 'OK', message: 'API is running' });
+
+apiRouter.get('/aboutUs', async (req, res) => {
+  const { lang } = req.query;
+  const language = lang === 'ge' ? 'ge' : 'en';
+  console.log(language);
+  try {
+    const aboutUs = await AboutUs.findOne({}).lean();
+
+    const responseData = {
+      aboutus_title: aboutUs[`aboutus_title_${language}`],
+      aboutus_section_little_description: aboutUs[`aboutus_section_little_description_${language}`],
+      aboutus_section_description: aboutUs[`aboutus_section_description_${language}`],
+      aboutus_experience_overview: aboutUs[`aboutus_experience_overview_${language}`],
+      aboutus_facilities_and_services: aboutUs[`aboutus_facilities_and_services_${language}`],
+      aboutus_wine_collections_and_story: aboutUs[`aboutus_wine_collections_and_story_${language}`],
+      aboutus_historical_culture_heritage: aboutUs[`aboutus_historical_culture_heritage_${language}`],
+      aboutus_family_tradition: aboutUs[`aboutus_family_tradition_${language}`],
+      aboutus_farmToTable_experience: aboutUs[`aboutus_farmToTable_experience_${language}`],
+      iliaImageUrl: aboutUs.iliaImageUrl,
+      artWorkImageUrl: aboutUs.artWorkImageUrl,
+    };
+
+    res.json(responseData);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to fetch about us data' });
+  }
 });
 
-// // Agro
-// router.get('/agro', async (req, res) => {
-//   try {
-//     const agro = await Agro.find({}).lean();
-//     res.json(agro);
-//   } catch (error) {
-//     res.status(500).json({ error: 'Failed to fetch agro data' });
-//   }
-// });
+apiRouter.get('/agro', async (req, res) => {
+  try {
+    const agro = await Agro.find({}).lean();
+    res.json(agro);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch agro data' });
+  }
+});
 
-// // Restaurant & Bar
-// router.get('/restaurant-bar', async (req, res) => {
-//   try {
-//     const restaurantBar = await RestaurantBar.find({}).lean();
-//     res.json(restaurantBar);
-//   } catch (error) {
-//     res.status(500).json({ error: 'Failed to fetch restaurant & bar data' });
-//   }
-// });
+apiRouter.get('/restaurant-bar', async (req, res) => {
+  try {
+    const restaurantBar = await RestaurantBar.find({}).lean();
+    res.json(restaurantBar);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch restaurant & bar data' });
+  }
+});
 
-// // Services
-// router.get('/services', async (req, res) => {
-//   try {
-//     const services = await Services.find({}).lean();
-//     res.json(services);
-//   } catch (error) {
-//     res.status(500).json({ error: 'Failed to fetch services' });
-//   }
-// });
+apiRouter.get('/services', async (req, res) => {
+  try {
+    const services = await Services.find({}).lean();
+    res.json(services);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch services' });
+  }
+});
 
-// // Kids Entertainment
-// router.get('/kids-entertainment', async (req, res) => {
-//   try {
-//     const kidsEntertainment = await KidsEntertainment.find({}).lean();
-//     res.json(kidsEntertainment);
-//   } catch (error) {
-//     res.status(500).json({ error: 'Failed to fetch kids entertainment data' });
-//   }
-// });
+apiRouter.get('/kids-entertainment', async (req, res) => {
+  try {
+    const kidsEntertainment = await KidsEntertainment.find({}).lean();
+    res.json(kidsEntertainment);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch kids entertainment data' });
+  }
+});
 
-// // Meetings & Events
-// router.get('/meetings-events', async (req, res) => {
-//   try {
-//     const meetingsEvents = await MeetingsEvent.find({}).lean();
-//     res.json(meetingsEvents);
-//   } catch (error) {
-//     res.status(500).json({ error: 'Failed to fetch meetings & events data' });
-//   }
-// });
+apiRouter.get('/meetings-events', async (req, res) => {
+  try {
+    const meetingsEvents = await MeetingsEvent.find({}).lean();
+    res.json(meetingsEvents);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch meetings & events data' });
+  }
+});
 
-// // Spa & Wellness
-// router.get('/spa-wellness', async (req, res) => {
-//   try {
-//     const spaWellness = await SpaWellness.find({}).lean();
-//     res.json(spaWellness);
-//   } catch (error) {
-//     res.status(500).json({ error: 'Failed to fetch spa & wellness data' });
-//   }
-// });
+apiRouter.get('/spa-wellness', async (req, res) => {
+  try {
+    const spaWellness = await SpaWellness.find({}).lean();
+    res.json(spaWellness);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch spa & wellness data' });
+  }
+});
+apiRouter.get('/blog', async (req, res) => {
+  try {
+    const blogs = await Blog.find({}).lean();
+    res.json(blogs);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch blog posts' });
+  }
+});
 
-// // Blog
-// router.get('/blog', async (req, res) => {
-//   try {
-//     const blogs = await Blog.find({}).lean();
-//     res.json(blogs);
-//   } catch (error) {
-//     res.status(500).json({ error: 'Failed to fetch blog posts' });
-//   }
-// });
+apiRouter.get('/contact', async (req, res) => {
+  try {
+    const contact = await Contact.findOne({}).lean();
+    res.json(contact);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch contact data' });
+  }
+});
 
-// // Contact
-// router.get('/contact', async (req, res) => {
-//   try {
-//     const contact = await Contact.findOne({}).lean();
-//     res.json(contact);
-//   } catch (error) {
-//     res.status(500).json({ error: 'Failed to fetch contact data' });
-//   }
-// });
+apiRouter.get('/rooms', async (req, res) => {
+  try {
+    const rooms = await Rooms.find({}).lean();
+    res.json(rooms);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch rooms' });
+  }
+});
 
-// // Rooms
-// router.get('/rooms', async (req, res) => {
-//   try {
-//     const rooms = await Rooms.find({}).lean();
-//     res.json(rooms);
-//   } catch (error) {
-//     res.status(500).json({ error: 'Failed to fetch rooms' });
-//   }
-// });
-
-// // Wine
-// router.get('/wine', async (req, res) => {
-//   try {
-//     const wine = await Wine.find({}).lean();
-//     res.json(wine);
-//   } catch (error) {
-//     res.status(500).json({ error: 'Failed to fetch wine data' });
-//   }
-// });
+apiRouter.get('/wine', async (req, res) => {
+  try {
+    const wine = await Wine.find({}).lean();
+    res.json(wine);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch wine data' });
+  }
+});
 
 export default apiRouter;

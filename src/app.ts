@@ -15,32 +15,35 @@ AdminJS.registerAdapter({
 
 const port = process.env.PORT || 3001;
 
-
-
 const start = async () => {
   const app = express();
 
   await initializeDb();
-  app.use(express.json());
-  app.use(express.urlencoded({ extended: true }));
+
+  // Set up CORS
   const corsOptions = {
     origin: ['http://localhost:3000'],
     credentials: true,
   };
   app.use(cors(corsOptions));
+
+  // Set up API routes
   app.use('/api', apiRouter);
   app.get('/', (req, res) => {
     res.send('Hello World');
   });
 
+  // AdminJS setup
   const admin = new AdminJS(options);
 
+  // Initialize AdminJS (in production or watch in development)
   if (process.env.NODE_ENV === 'production') {
     await admin.initialize();
   } else {
     admin.watch();
   }
 
+  // Build authenticated router for AdminJS
   const router = buildAuthenticatedRouter(
     admin,
     {
@@ -57,6 +60,10 @@ const start = async () => {
   );
 
   app.use(admin.options.rootPath, router);
+
+  app.use(express.json());
+  app.use(express.urlencoded({ extended: true }));
+
   app.listen(port, () => {
     console.log(`AdminJS available at http://localhost:${port}${admin.options.rootPath}`);
   });

@@ -19,8 +19,8 @@ export interface IAboutUs extends Document {
   aboutus_family_tradition_ge?: string;
   aboutus_farmToTable_experience_en?: string;
   aboutus_farmToTable_experience_ge?: string;
-  imageUrl?: string;
   iliaImageUrl?: string;
+  artWorkImageUrl?: string;
 }
 
 export const AboutUsSchema = new Schema<IAboutUs>({
@@ -78,10 +78,11 @@ export const AboutUsSchema = new Schema<IAboutUs>({
   aboutus_farmToTable_experience_ge: {
     type: String,
   },
-  imageUrl: {
-    type: String,
-  },  
+
   iliaImageUrl: {
+    type: String,
+  },
+  artWorkImageUrl: {
     type: String,
   },
 });

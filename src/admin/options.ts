@@ -52,10 +52,10 @@ const HomeResourceOptions: ResourceOptions = {
 };
 const AboutUsResourceOptions: ResourceOptions = {
   properties: {
-    imageUrl: {
+    iliaImageUrl: {
       isVisible: { list: true, filter: false, show: true, edit: false },
     },
-    iliaImageUrl: {
+    artWorkImageUrl: {
       isVisible: { list: true, filter: false, show: true, edit: false },
     },
   },
@@ -72,8 +72,7 @@ const AgroResourceOptions: ResourceOptions = {
 };
 const ServiceResourceOptions: ResourceOptions = {
   properties: {
-      restaurantImageUrl: {
-
+    restaurantImageUrl: {
       isVisible: { list: true, filter: false, show: true, edit: false },
     },
     barImageUrl: {
@@ -112,7 +111,7 @@ const meetingsEventsResourceOptions: ResourceOptions = {
 
     artWorkImageUrl: {
       isVisible: { list: true, filter: false, show: true, edit: false },
-    },    
+    },
     conferenceRoomsImageUrl: {
       isVisible: { list: true, filter: false, show: true, edit: false },
     },
@@ -357,28 +356,7 @@ const options: AdminJSOptions = {
       resource: AboutUs,
       options: AboutUsResourceOptions,
       features: [
-        uploadFeature({
-          componentLoader,
-          provider: {
-            aws: {
-              bucket: process.env.AWS_S3_BUCKET!,
-              region: process.env.AWS_REGION!,
-              accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
-              secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
-            },
-          },
-          properties: {
-            key: 'imageUrl',
-            file: 'uploadImage',
-            mimeType: 'mimeType',
-            bucket: 'bucket',
-            size: 'size',
-            filename: 'filename',
-            filePath: 'filePath',
-            filesToDelete: 'filesToDelete',
-          },
-          uploadPath: (record, mimeType) => `images/${record.id()}.${mimeType}`,
-        }),
+     
         uploadFeature({
           componentLoader,
           provider: {
@@ -399,7 +377,29 @@ const options: AdminJSOptions = {
             filePath: 'filePathIlia',
             filesToDelete: 'filesToDeleteIlia',
           },
-          uploadPath: (record, mimeType) => `images/${record.id()}/ilia.${mimeType}`,
+          uploadPath: (record, mimeType) => `images/${record.id()}.${mimeType}`,
+        }),
+        uploadFeature({
+          componentLoader,
+          provider: {
+            aws: {
+              bucket: process.env.AWS_S3_BUCKET!,
+              region: process.env.AWS_REGION!,
+              accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+              secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+            },
+          },
+          properties: {
+            key: 'artWorkImageUrl',
+            file: 'uploadImageArtWork',
+            mimeType: 'mimeTypeArtWork',
+            bucket: 'bucketArtWork',
+            size: 'sizeArtWork',
+            filename: 'filenameArtWork',
+            filePath: 'filePathArtWork',
+            filesToDelete: 'filesToDeleteArtWork',
+          },
+          uploadPath: (record, mimeType) => `images/${record.id()}.${mimeType}`,
         }),
       ],
     },
@@ -424,13 +424,13 @@ const options: AdminJSOptions = {
             bucket: 'bucket',
             size: 'size',
             filename: 'filename',
-               filePath: 'filePath',
+            filePath: 'filePath',
             filesToDelete: 'filesToDelete',
           },
-          
+
           uploadPath: (record, mimeType) => `images/${record.id()}/image.${mimeType}`,
         }),
-          uploadFeature({
+        uploadFeature({
           componentLoader,
           provider: {
             aws: {
@@ -447,10 +447,10 @@ const options: AdminJSOptions = {
             bucket: 'bucketAgro',
             size: 'sizeAgro',
             filename: 'filenameAgro',
-               filePath: 'AgroPath',
+            filePath: 'AgroPath',
             filesToDelete: 'AgroDelete',
           },
-          
+
           uploadPath: (record, mimeType) => `images/${record.id()}/agro.${mimeType}`,
         }),
       ],
@@ -470,7 +470,7 @@ const options: AdminJSOptions = {
             },
           },
           properties: {
-             key: 'restaurantImageUrl',
+            key: 'restaurantImageUrl',
             file: 'uploadImageRestaurant',
             mimeType: 'mimeTypeRestaurant',
             bucket: 'bucketRestaurant',
@@ -481,7 +481,7 @@ const options: AdminJSOptions = {
           },
           uploadPath: (record, mimeType) => `images/${record.id()}/restaurannt.${mimeType}`,
         }),
-         uploadFeature({
+        uploadFeature({
           componentLoader,
           provider: {
             aws: {
@@ -492,7 +492,7 @@ const options: AdminJSOptions = {
             },
           },
           properties: {
-             key: 'restaurantImageUrl',
+            key: 'restaurantImageUrl',
             file: 'uploadImageRestaurant',
             mimeType: 'mimeTypeRestaurant',
             bucket: 'bucketRestaurant',
@@ -503,7 +503,7 @@ const options: AdminJSOptions = {
           },
           uploadPath: (record, mimeType) => `images/${record.id()}/restaurannt.${mimeType}`,
         }),
-         uploadFeature({
+        uploadFeature({
           componentLoader,
           provider: {
             aws: {
@@ -514,7 +514,7 @@ const options: AdminJSOptions = {
             },
           },
           properties: {
-             key: ' meetingsAndEventsImageUrl',
+            key: ' meetingsAndEventsImageUrl',
             file: 'uploadImageMeetingsAndEvents',
             mimeType: 'mimeTypeMeetingsAndEvents',
             bucket: 'bucketMeetingsAndEvents',
@@ -525,7 +525,7 @@ const options: AdminJSOptions = {
           },
           uploadPath: (record, mimeType) => `images/${record.id()}/meetingsAndEvents.${mimeType}`,
         }),
-         uploadFeature({
+        uploadFeature({
           componentLoader,
           provider: {
             aws: {
@@ -536,7 +536,7 @@ const options: AdminJSOptions = {
             },
           },
           properties: {
-             key: 'wellnessAndFitnessImageUrl',
+            key: 'wellnessAndFitnessImageUrl',
             file: 'uploadImageWellnessAndFitness',
             mimeType: 'mimeTypeWellnessAndFitness',
             bucket: 'bucketWellnessAndFitness',
@@ -547,7 +547,7 @@ const options: AdminJSOptions = {
           },
           uploadPath: (record, mimeType) => `images/${record.id()}/WellnessAndFitness.${mimeType}`,
         }),
-         uploadFeature({
+        uploadFeature({
           componentLoader,
           provider: {
             aws: {
@@ -558,7 +558,7 @@ const options: AdminJSOptions = {
             },
           },
           properties: {
-             key: 'kidsEntertainmentImageUrl',
+            key: 'kidsEntertainmentImageUrl',
             file: 'uploadImageKidsEntertainmentImageUrl',
             mimeType: 'mimeTypeKidsEntertainmentImageUrl',
             bucket: 'bucketKidsEntertainmentImageUrl',
@@ -671,7 +671,7 @@ const options: AdminJSOptions = {
           },
           uploadPath: (record, mimeType) => `images/${record.id()}/arwork.${mimeType}`,
         }),
-   uploadFeature({
+        uploadFeature({
           componentLoader,
           provider: {
             aws: {

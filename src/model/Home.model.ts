@@ -104,3 +104,4 @@ const HomeSchema = new Schema<IHome>({
 });
 
 export const Home = model<IHome>('Home', HomeSchema);
+
