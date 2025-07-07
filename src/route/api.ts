@@ -13,6 +13,7 @@ import { Blog } from '../model/Blog.model.js';
 import { Contact } from '../model/Contact.model.js';
 import { Rooms } from '../model/rooms.model.js';
 import { Wine } from '../model/wine.model.js';
+import { HomeRooms } from '../model/HomeRooms.model.js';
 
 const apiRouter = express.Router();
 
@@ -22,16 +23,31 @@ apiRouter.get('/home', async (req, res) => {
   console.log(language);
   try {
     const home = await Home.findOne({}).lean();
-    console.log(home);
-
-    // const responseData = {
-    //   aboutus_experience_overview: aboutUs[`aboutus_experience_overview_${language}`],
-    //   aboutus_facilities_and_services: aboutUs[`aboutus_facilities_and_services_${language}`],
-    //   aboutus_wine_collections_and_story: aboutUs[`aboutus_wine_collections_and_story_${language}`],
-    //   aboutus_historical_culture_heritage: aboutUs[`aboutus_historical_culture_heritage_${language}`],
-    //   aboutus_family_tradition: aboutUs[`aboutus_family_tradition_${language}`],
-    //   aboutus_farmToTable_experience: aboutUs[`aboutus_farmToTable_experience_${language}`],
-    // };
+    const responseData = {
+      home_pabellon_section_description_en: home[`home_pabellon_section_description_${language}`],
+      home_pabellon_section_description_ge: home[`home_pabellon_section_description_${language}`],
+      home_pabellon_section_little_description_en: home[`home_pabellon_section_little_description_${language}`],
+      home_pabellon_section_little_description_ge: home[`home_pabellon_section_little_description_${language}`],
+      home_rooms_section_title_en: home[`home_rooms_section_title_${language}`],
+      home_rooms_section_title_ge: home[`home_rooms_section_title_${language}`],
+      home_rooms_section_description_en: home[`home_rooms_section_description_${language}`],
+      home_rooms_section_description_ge: home[`home_rooms_section_description_${language}`],
+      home_rooms_section_little_description_en: home[`home_rooms_section_little_description_${language}`],
+      home_rooms_section_little_description_ge: home[`home_rooms_section_little_description_${language}`],
+      home_big_description_en: home[`home_big_description_${language}`],
+      home_big_description_ge: home[`home_big_description_${language}`],
+      home_contact_section_title_en: home[`home_contact_section_title_${language}`],
+      home_contact_section_title_ge: home[`home_contact_section_title_${language}`],
+      home_contact_section_getInTouch_en: home[`home_contact_section_getInTouch_${language}`],
+      home_contact_section_getInTouch_ge: home[`home_contact_section_getInTouch_${language}`],
+      home_contact_section_about_team_en: home[`home_contact_section_about_team_${language}`],
+      home_contact_section_about_team_ge: home[`home_contact_section_about_team_${language}`],
+      home_contact_section_email: home.home_contact_section_email,
+      home_contact_section_phone: home.home_contact_section_phone,
+      hero_imageUrl: home.hero_imageUrl,
+      pabellon_imageUrl: home.pabellon_imageUrl,
+    };
+    res.json(responseData);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Failed to fetch about us data' });
@@ -63,6 +79,30 @@ apiRouter.get('/aboutUs', async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Failed to fetch about us data' });
+  }
+});
+apiRouter.get('/homeRooms', async (req, res) => {
+  const { lang } = req.query;
+  const language = lang === 'ge' ? 'ge' : 'en';
+  
+  try {
+    const homeRooms = await HomeRooms.find({}).lean();
+    const responseData = homeRooms.map((room) => ({
+      imageUrl: room.imageUrl,
+      rooms_title_en: room[`rooms_title_${language}`],
+      rooms_title_ge: room[`rooms_title_${language}`],
+      rooms_description_en: room[`rooms_description_${language}`],
+      rooms_description_ge: room[`rooms_description_${language}`],
+      rooms_people_quantity: room.rooms_people_quantity,
+      rooms_bed_quantity: room.rooms_bed_quantity,
+      rooms_area: room.rooms_area,
+      rooms_sofa: room.rooms_sofa,
+      rooms_bath: room.rooms_bath,
+    }));
+
+    res.json(responseData);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch home rooms data' });
   }
 });
 
