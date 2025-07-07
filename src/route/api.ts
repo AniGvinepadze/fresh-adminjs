@@ -107,11 +107,23 @@ apiRouter.get('/homeRooms', async (req, res) => {
 });
 
 apiRouter.get('/agro', async (req, res) => {
+  const { lang } = req.query;
+  const language = lang === 'ge' ? 'ge' : 'en';
+  console.log(language);
   try {
-    const agro = await Agro.find({}).lean();
-    res.json(agro);
+    const agro = await Agro.findOne({}).lean();
+
+    const responseData = {
+      agro_section_little_description: agro[`agro_section_little_description_${language}`],
+      agro_section_description: agro[`agro_section_description_${language}`],
+      our_mission_title: agro[`our_mission_title_${language}`],
+      our_mission_description: agro[`our_mission_description_${language}`],
+    };
+
+    res.json(responseData);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch agro data' });
+    console.error(error);
+    res.status(500).json({ error: 'Failed to fetch about us data' });
   }
 });
 
