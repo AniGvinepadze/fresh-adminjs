@@ -94,14 +94,52 @@ const ServiceResourceOptions: ResourceOptions = {
 };
 const RestaurantBarResourceOptions: ResourceOptions = {
   properties: {
-    imageUrl: {
+    logoImageUrl: {
       isVisible: { list: true, filter: false, show: true, edit: false },
     },
+        mainImageUrl: {
+      isVisible: { list: true, filter: false, show: true, edit: false },
+    },
+    
+        makrineRestaurantImageUrl: {
+      isVisible: { list: true, filter: false, show: true, edit: false },
+    },
+    
+        restaurantBarImageUrl: {
+      isVisible: { list: true, filter: false, show: true, edit: false },
+    },
+    
+        lobbyImageUrl: {
+      isVisible: { list: true, filter: false, show: true, edit: false },
+    },
+    
+        poolImageUrl: {
+      isVisible: { list: true, filter: false, show: true, edit: false },
+    },
+    
+  
+    
+    
   },
 };
 const kidsEntertainmentResourceOptions: ResourceOptions = {
   properties: {
-    imageUrl: {
+    logoImageUrl: {
+      isVisible: { list: true, filter: false, show: true, edit: false },
+    },
+    poolImageUrl: {
+      isVisible: { list: true, filter: false, show: true, edit: false },
+    },
+    mainImageUrl: {
+      isVisible: { list: true, filter: false, show: true, edit: false },
+    },
+    makrineRestaurantImageUrl: {
+      isVisible: { list: true, filter: false, show: true, edit: false },
+    },
+    restaurantBarImageUrl: {
+      isVisible: { list: true, filter: false, show: true, edit: false },
+    },
+    lobbyImageUrl: {
       isVisible: { list: true, filter: false, show: true, edit: false },
     },
   },
@@ -613,14 +651,126 @@ const options: AdminJSOptions = {
             },
           },
           properties: {
-            key: 'imageUrl',
-            file: 'uploadImage',
-            mimeType: 'mimeType',
-            bucket: 'bucket',
-            size: 'size',
-            filename: 'filename',
+            key: 'logoImageUrl',
+            file: 'uploadImagelogo',
+            mimeType: 'mimeTypelogo',
+            bucket: 'bucketlogo',
+            size: 'sizelogo',
+            filename: 'filenamelogo',
+            filePath: 'filePathlogo',
+            filesToDelete: 'filesToDeletelogo',
           },
-          uploadPath: (record, mimeType) => `images/${record.id()}.${mimeType}`,
+          uploadPath: (record, mimeType) => `images/${record.id()}/logo.${mimeType}`,
+        }),
+          uploadFeature({
+          componentLoader,
+          provider: {
+            aws: {
+              bucket: process.env.AWS_S3_BUCKET!,
+              region: process.env.AWS_REGION!,
+              accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+              secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+            },
+          },
+          properties: {
+            key: 'restaurantBarImageUrl',
+            file: 'uploadImagerestaurantBar',
+            mimeType: 'mimeTyperestaurantBar',
+            bucket: 'bucketrestaurantBar',
+            size: 'sizerestaurantBar',
+            filename: 'filenamerestaurantBar',
+            filePath: 'filePathrestaurantBar',
+            filesToDelete: 'filesToDeleterestaurantBar',
+          },
+          uploadPath: (record, mimeType) => `images/${record.id()}/restaurantBar.${mimeType}`,
+        }),
+          uploadFeature({
+          componentLoader,
+          provider: {
+            aws: {
+              bucket: process.env.AWS_S3_BUCKET!,
+              region: process.env.AWS_REGION!,
+              accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+              secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+            },
+          },
+          properties: {
+            key: 'lobbyImageUrl',
+            file: 'uploadImagelobby',
+            mimeType: 'mimeTypelobby',
+            bucket: 'bucketlobby',
+            size: 'sizelobby',
+            filename: 'filenamelobby',
+            filePath: 'filePathlobby',
+            filesToDelete: 'filesToDeletelobby',
+          },
+          uploadPath: (record, mimeType) => `images/${record.id()}/lobby.${mimeType}`,
+        }),
+          uploadFeature({
+          componentLoader,
+          provider: {
+            aws: {
+              bucket: process.env.AWS_S3_BUCKET!,
+              region: process.env.AWS_REGION!,
+              accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+              secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+            },
+          },
+          properties: {
+            key: 'poolImageUrl',
+            file: 'uploadImagepool',
+            mimeType: 'mimeTypepool',
+            bucket: 'bucketpool',
+            size: 'sizepool',
+            filename: 'filenamepool',
+            filePath: 'filePathpool',
+            filesToDelete: 'filesToDeletepool',
+          },
+          uploadPath: (record, mimeType) => `images/${record.id()}/pool.${mimeType}`,
+        }),
+          uploadFeature({
+          componentLoader,
+          provider: {
+            aws: {
+              bucket: process.env.AWS_S3_BUCKET!,
+              region: process.env.AWS_REGION!,
+              accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+              secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+            },
+          },
+          properties: {
+            key: 'mainImageUrl',
+            file: 'uploadImagemain',
+            mimeType: 'mimeTypemain',
+            bucket: 'bucketmain',
+            size: 'sizemain',
+            filename: 'filenamemain',
+            filePath: 'filePathmain',
+            filesToDelete: 'filesToDeletemain',
+          },
+          uploadPath: (record, mimeType) => `images/${record.id()}/main.${mimeType}`,
+        }),
+          uploadFeature({
+          componentLoader,
+          provider: {
+            aws: {
+              bucket: process.env.AWS_S3_BUCKET!,
+              region: process.env.AWS_REGION!,
+              accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+              secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+            },
+          },
+          properties: {
+            key: 'makrineRestaurantImageUrl',
+            file: 'uploadImagemakrineRestaurant',
+            mimeType: 'mimeTypemakrineRestaurant',
+            bucket: 'bucketmakrineRestaurant',
+            size: 'sizemakrineRestaurant',
+            filename: 'filenamemakrineRestaurant',
+            filePath: 'filePathmakrineRestaurant',
+            filesToDelete: 'filesToDeletemakrineRestaurant',
+          },
+          uploadPath: (record, mimeType) => `images/${record.id()}/makrineRestaurant.${mimeType}`,
         }),
       ],
     },

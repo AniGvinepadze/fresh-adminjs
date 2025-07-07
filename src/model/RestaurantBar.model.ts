@@ -29,7 +29,12 @@ export interface RestaurantBar extends Document {
   pool_bar_title_ge?: string;
   pool_bar_section_description_en?: string;
   pool_bar_section_description_ge?: string;
-  imageUrl?: string;
+  logoImageUrl?: string;
+  mainImageUrl?: string;
+  makrineRestaurantImageUrl?: string;
+  restaurantBarImageUrl?: string;
+  lobbyImageUrl?: string;
+  poolImageUrl?: string;
 }
 
 export const RestaurantBarSchema = new Schema<RestaurantBar>({
@@ -117,7 +122,22 @@ export const RestaurantBarSchema = new Schema<RestaurantBar>({
   pool_bar_section_description_ge: {
     type: String,
   },
-  imageUrl: {
+  logoImageUrl: {
+    type: String,
+  },
+  mainImageUrl: {
+    type: String,
+  },
+  makrineRestaurantImageUrl: {
+    type: String,
+  },
+  restaurantBarImageUrl: {
+    type: String,
+  },
+  lobbyImageUrl: {
+    type: String,
+  },
+  poolImageUrl: {
     type: String,
   },
 });

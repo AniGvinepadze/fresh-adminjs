@@ -128,14 +128,47 @@ apiRouter.get('/agro', async (req, res) => {
   }
 });
 
-apiRouter.get('/restaurant-bar', async (req, res) => {
+apiRouter.get('/restaurantbar', async (req, res) => {
+  const { lang } = req.query;
+  const language = lang === 'ge' ? 'ge' : 'en';
+
   try {
-    const restaurantBar = await RestaurantBar.find({}).lean();
-    res.json(restaurantBar);
+    const bars = await RestaurantBar.find({}).lean();
+    const responseData = bars.map((bar) => ({
+      makrine_section_little_description: bar[`makrine_section_little_description_${language}`],
+      makrine_section_description: bar[`makrine_section_description_${language}`],
+
+      makrine_restaurant_title: bar[`makrine_restaurant_title_${language}`],
+      makrine_restaurant_section_little_description: bar[`makrine_restaurant_section_little_description_${language}`],
+      makrine_restaurant_section_description: bar[`makrine_restaurant_section_description_${language}`],
+      makrine_restaurant_community_impact: bar[`makrine_restaurant_community_impact_${language}`],
+      makrine_restaurant_menu: bar[`makrine_restaurant_menu_${language}`],
+
+      restaurant_and_bar_section_title: bar[`restaurant_and_bar_section_title_${language}`],
+      restaurant_and_bar_section_description: bar[`restaurant_and_bar_section_description_${language}`],
+
+      lobby_bar_title: bar[`lobby_bar_title_${language}`],
+      lobby_bar_little_description: bar[`lobby_bar_little_description_${language}`],
+      lobby_bar_description: bar[`lobby_bar_description_${language}`],
+
+      pool_bar_title: bar[`pool_bar_title_${language}`],
+      pool_bar_section_description: bar[`pool_bar_section_description_${language}`],
+
+      logoImageUrl: bar['logoImageUrl'],
+      mainImageUrl: bar['mainImageUrl'],
+      makrineRestaurantImageUrl: bar['makrineRestaurantImageUrl'],
+      restaurantBarImageUrl: bar['restaurantBarImageUrl'],
+      lobbyImageUrl: bar['lobbyImageUrl'],
+      poolImageUrl: bar['poolImageUrl'],
+    }));
+
+    res.json(responseData);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch restaurant & bar data' });
+    console.error('Failed to fetch restaurant bars:', error);
+    res.status(500).json({ error: 'Failed to fetch restaurant bars' });
   }
 });
+
 
 apiRouter.get('/services', async (req, res) => {
   const { lang } = req.query;
@@ -200,9 +233,9 @@ apiRouter.get('/kids-entertainmentimgs', async (req, res) => {
     const responseData = {
       imageUrl: kidsEntertainment['imageUrl'],
       secondImageUrl: kidsEntertainment['secondImageUrl'],
-    thirdImageUrl: kidsEntertainment['thirdImageUrl'],
+      thirdImageUrl: kidsEntertainment['thirdImageUrl'],
       fourthImageUrl: kidsEntertainment['fourthImageUrl'],
-    }
+    };
     res.json(responseData);
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch kids entertainment data' });
