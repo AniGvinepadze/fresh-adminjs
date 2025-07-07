@@ -12,7 +12,7 @@ import { SpaWellness } from '../model/SpaWellnes.mode.js';
 import { Blog } from '../model/Blog.model.js';
 import { Contact } from '../model/Contact.model.js';
 import { Rooms } from '../model/rooms.model.js';
-import { Wine } from '../model/winee.model.js';
+import { Wine } from '../model/wine.model.js';
 
 const apiRouter = express.Router();
 
@@ -147,10 +147,43 @@ apiRouter.get('/rooms', async (req, res) => {
 });
 
 apiRouter.get('/wine', async (req, res) => {
+  const { lang } = req.query;
+  const language = lang === 'ge' ? 'ge' : 'en';
   try {
-    const wine = await Wine.find({}).lean();
-    res.json(wine);
+    const wine = await Wine.findOne({}).lean();
+
+    const categories = [
+      {
+        title: wine[`wine_categories_first_title_${language}`],
+        description: wine[`wine_categories_first_description_${language}`],
+      },
+      {
+        title: wine[`wine_categories_second_title_${language}`],
+        description: wine[`wine_categories_second_description_${language}`],
+      },
+      {
+        title: wine[`wine_categories_third_title_${language}`],
+        description: wine[`wine_categories_third_description_${language}`],
+      },
+      {
+        title: wine[`wine_categories_fourth_title_${language}`],
+        description: wine[`wine_categories_fourth_description_${language}`],
+      },
+    ];
+
+    const responseData = {
+      wine_page_title: wine[`wine_page_title_${language}`],
+      wine_page_breath_deeply: wine[`wine_page_breath_deeply_${language}`],
+      wine_page_mission: wine[`wine_page_mission_${language}`],
+      wine_categories_title: wine[`wine_categories_title_${language}`],
+      wine_categories: categories,
+      wine_page_table: wine[`wine_page_table_${language}`],
+      winePageImageFirst: wine.winePageImageFirst,
+      winePageImageSecond: wine.winePageImageSecond,
+    };
+    res.json(responseData);
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: 'Failed to fetch wine data' });
   }
 });

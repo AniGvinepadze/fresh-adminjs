@@ -15,7 +15,7 @@ import { Blog } from '../model/Blog.model.js';
 
 import { Contact } from '../model/Contact.model.js';
 import { Rooms } from '../model/rooms.model.js';
-import { Wine } from '../model/winee.model.js';
+import { Wine } from '../model/wine.model.js';
 import { HomeRooms } from '../model/HomeRooms.model.js';
 import { KidsEntertainmentImage } from '../model/KidsEntertainmentImages.model.js';
 import { MakrinetImage } from '../model/MakrineImages.model.js';
@@ -147,7 +147,10 @@ const RoomsResourceOptions: ResourceOptions = {
 };
 const WineEventsResourceOptions: ResourceOptions = {
   properties: {
-    imageUrl: {
+    winePageImageFirst: {
+      isVisible: { list: true, filter: false, show: true, edit: false },
+    },
+    winePageImageSecond: {
       isVisible: { list: true, filter: false, show: true, edit: false },
     },
   },
@@ -814,12 +817,36 @@ const options: AdminJSOptions = {
             },
           },
           properties: {
-            key: 'imageUrl',
-            file: 'uploadImage',
-            mimeType: 'mimeType',
-            bucket: 'bucket',
-            size: 'size',
-            filename: 'filename',
+            key: 'winePageImageFirst',
+            file: 'uploadImageWineFirst',
+            mimeType: 'mimeUploadImageWineFirst',
+            bucket: 'bucketWine',
+            size: 'sizeWine',
+            filename: 'filenameWine',
+            filePath: 'filePathWine',
+            filesToDelete: 'filesToDeleteWine',
+          },
+          uploadPath: (record, mimeType) => `images/${record.id()}.${mimeType}`,
+        }),
+        uploadFeature({
+          componentLoader,
+          provider: {
+            aws: {
+              bucket: process.env.AWS_S3_BUCKET!,
+              region: process.env.AWS_REGION!,
+              accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+              secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+            },
+          },
+            properties: {
+              key: 'winePageImageSecond',
+              file: 'uploadImageWineSecond',
+              mimeType: 'mimeUploadImageWineSecond',
+              bucket: 'bucketWineSecond',
+              size: 'sizeWineSecond',
+              filename: 'filenameWineSecond',
+              filePath: 'filePathWineSecond',
+              filesToDelete: 'filesToDeleteWineSecond',
           },
           uploadPath: (record, mimeType) => `images/${record.id()}.${mimeType}`,
         }),
