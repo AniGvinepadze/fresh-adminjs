@@ -29,6 +29,9 @@ const start = async () => {
   };
   app.use(cors(corsOptions));
   app.use('/api', apiRouter);
+  app.get('/', (req, res) => {
+    res.send('Hello World');
+  });
 
   const admin = new AdminJS(options);
 
