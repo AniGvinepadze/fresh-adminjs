@@ -31,11 +31,14 @@ export interface Services extends Document {
   kids_entertainment_section_little_description_ge?: string;
   kids_entertainment_section_description_en?: string;
   kids_entertainment_section_description_ge?: string;
+  kids_entertainment_section_big_description_ge?: string;
+  kids_entertainment_section_big_description_en?: string;
   restaurantImageUrl?: string;
   barImageUrl?: string;
   meetingsAndEventsImageUrl?: string;
   wellnessAndFitnessImageUrl?: string;
   kidsEntertainmentImageUrl?: string;
+  artImageUrl?: string;
 }
 
 export const ServicesSchema = new Schema<Services>({
@@ -129,6 +132,12 @@ export const ServicesSchema = new Schema<Services>({
   kids_entertainment_section_description_ge: {
     type: String,
   },
+  kids_entertainment_section_big_description_en: {
+    type: String,
+  },
+  kids_entertainment_section_big_description_ge: {
+    type: String,
+  },
   restaurantImageUrl: {
     type: String,
   },
@@ -144,7 +153,9 @@ export const ServicesSchema = new Schema<Services>({
   kidsEntertainmentImageUrl: {
     type: String,
   },
-  
+  artImageUrl: {
+    type: String,
+  },
 });
 
 export const Services = model<Services>('Services', ServicesSchema);

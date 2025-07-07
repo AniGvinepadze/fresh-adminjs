@@ -37,7 +37,7 @@ export interface Rooms extends mongoose.Document {
   rooms_section_little_description_ge?: string;
   rooms_section_description_en?: string;
   rooms_section_description_ge?: string;
-  rooms?: Array<typeof roomsInfoSchema>;
+  // rooms?: Array<typeof roomsInfoSchema>;
   imageUrl?: string;
 }
 
@@ -60,9 +60,9 @@ export const RoomsSchema = new Schema<Rooms>({
   rooms_section_description_ge: {
     type: String,
   },
-  rooms: {
-    type: [roomsInfoSchema],
-  },
+  // rooms: {
+  //   type: [roomsInfoSchema],
+  // },
   imageUrl: {
     type: String,
   },

@@ -14,6 +14,7 @@ import { Contact } from '../model/Contact.model.js';
 import { Rooms } from '../model/rooms.model.js';
 import { Wine } from '../model/wine.model.js';
 import { HomeRooms } from '../model/HomeRooms.model.js';
+import { KidsEntertainmentImage } from '../model/KidsEntertainmentImages.model.js';
 
 const apiRouter = express.Router();
 
@@ -84,7 +85,7 @@ apiRouter.get('/aboutUs', async (req, res) => {
 apiRouter.get('/homeRooms', async (req, res) => {
   const { lang } = req.query;
   const language = lang === 'ge' ? 'ge' : 'en';
-  
+
   try {
     const homeRooms = await HomeRooms.find({}).lean();
     const responseData = homeRooms.map((room) => ({
@@ -125,9 +126,46 @@ apiRouter.get('/restaurant-bar', async (req, res) => {
 });
 
 apiRouter.get('/services', async (req, res) => {
+  const { lang } = req.query;
+  const language = lang === 'ge' ? 'ge' : 'en';
   try {
     const services = await Services.find({}).lean();
-    res.json(services);
+    const responseData = services.map((service) => ({
+      restaurant_and_bars_title: service[`restaurant_and_bars__title_${language}`],
+      restaurant_and_bars_section_little_description:
+        service[`restaurant_and_bars_section_little_description_${language}`],
+      restaurant_and_bars_section_description: service[`restaurant_and_bars_section_description_${language}`],
+
+      bars_title: service[`bars_title_${language}`],
+      bars_section_description: service[`bars_section_description_${language}`],
+
+      meetings_and_events_title: service[`meetings_and_events_title_${language}`],
+      meetings_and_events_section_little_description:
+        service[`meetings_and_events_section_little_description_${language}`],
+      meetings_and_events_section_description: service[`meetings_and_events_section_description_${language}`],
+
+      wellness_and_fitness_title: service[`wellness_and_fitness_title_${language}`],
+      wellness_and_fitness_section_little_description:
+        service[`wellness_and_fitness_section_little_description_${language}`],
+      wellness_and_fitness_section_description: service[`wellness_and_fitness_section_description_${language}`],
+
+      our_facilities_title: service[`our_facilities_title_${language}`],
+
+      kids_entertainment_title: service[`kids_entertainment_title_${language}`],
+      kids_entertainment_section_little_description:
+        service[`kids_entertainment_section_little_description_${language}`],
+      kids_entertainment_section_description: service[`kids_entertainment_section_description_${language}`],
+      kids_entertainment_section_big_description: service[`kids_entertainment_section_big_description_${language}`],
+
+      restaurantImageUrl: service.restaurantImageUrl,
+      barImageUrl: service.barImageUrl,
+      meetingsAndEventsImageUrl: service.meetingsAndEventsImageUrl,
+      wellnessAndFitnessImageUrl: service.wellnessAndFitnessImageUrl,
+      kidsEntertainmentImageUrl: service.kidsEntertainmentImageUrl,
+      artImageUrl: service.artImageUrl,
+    }));
+
+    res.json(responseData);
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch services' });
   }
@@ -136,12 +174,28 @@ apiRouter.get('/services', async (req, res) => {
 apiRouter.get('/kids-entertainment', async (req, res) => {
   try {
     const kidsEntertainment = await KidsEntertainment.find({}).lean();
+
     res.json(kidsEntertainment);
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch kids entertainment data' });
   }
 });
-
+// apiRouter.get('/kids-entertainmentimgs', async (req, res) => {
+//   const { lang } = req.query;
+//   const language = lang === 'ge' ? 'ge' : 'en';
+//   try {
+//     const kidsEntertainment = await KidsEntertainmentImage.find({}).lean();
+//     const responseData = {
+//       imageUrl: kidsEntertainment.imageUrl,
+//       secondImageUrl: kidsEntertainment.secondImageUrl,
+//       thirdImageUrl: kidsEntertainment.thirdImageUrl,
+//       fourthImageUrl: kidsEntertainment.fourthImageUrl,
+//     }
+//     res.json(responseData);
+//   } catch (error) {
+//     res.status(500).json({ error: 'Failed to fetch kids entertainment data' });
+//   }
+// });
 apiRouter.get('/meetings-events', async (req, res) => {
   try {
     const meetingsEvents = await MeetingsEvent.find({}).lean();
@@ -178,9 +232,19 @@ apiRouter.get('/contact', async (req, res) => {
 });
 
 apiRouter.get('/rooms', async (req, res) => {
+  const { lang } = req.query;
+  const language = lang === 'ge' ? 'ge' : 'en';
   try {
     const rooms = await Rooms.find({}).lean();
-    res.json(rooms);
+
+    const responseData = rooms.map((room) => ({
+      imageUrl: room.imageUrl,
+      rooms_title: room[`rooms_title_${language}`],
+      rooms_section_little_description: room[`rooms_section_little_description_${language}`],
+      rooms_section_description: room[`rooms_section_description_${language}`],
+    }));
+    console.log(responseData);
+    res.json(responseData);
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch rooms' });
   }

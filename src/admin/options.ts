@@ -87,6 +87,9 @@ const ServiceResourceOptions: ResourceOptions = {
     kidsEntertainmentImageUrl: {
       isVisible: { list: true, filter: false, show: true, edit: false },
     },
+    artImageUrl: {
+      isVisible: { list: true, filter: false, show: true, edit: false },
+    },
   },
 };
 const RestaurantBarResourceOptions: ResourceOptions = {
@@ -359,7 +362,6 @@ const options: AdminJSOptions = {
       resource: AboutUs,
       options: AboutUsResourceOptions,
       features: [
-     
         uploadFeature({
           componentLoader,
           provider: {
@@ -482,7 +484,7 @@ const options: AdminJSOptions = {
             filePath: 'filePathRestaurant',
             filesToDelete: 'filesToDeleteRestaurant',
           },
-          uploadPath: (record, mimeType) => `images/${record.id()}/restaurannt.${mimeType}`,
+          uploadPath: (record, mimeType) => `images/${record.id()}/restaurant.${mimeType}`,
         }),
         uploadFeature({
           componentLoader,
@@ -495,16 +497,16 @@ const options: AdminJSOptions = {
             },
           },
           properties: {
-            key: 'restaurantImageUrl',
-            file: 'uploadImageRestaurant',
-            mimeType: 'mimeTypeRestaurant',
-            bucket: 'bucketRestaurant',
-            size: 'sizeRestaurant',
-            filename: 'filenameRestaurant',
-            filePath: 'filePathRestaurant',
-            filesToDelete: 'filesToDeleteRestaurant',
+            key: 'barImageUrl',
+            file: 'uploadImageBar',
+            mimeType: 'mimeTypeBar',
+            bucket: 'bucketBar',
+            size: 'sizeBar',
+            filename: 'filenameBar',
+            filePath: 'filePathBar',
+            filesToDelete: 'filesToDeleteBar',
           },
-          uploadPath: (record, mimeType) => `images/${record.id()}/restaurannt.${mimeType}`,
+          uploadPath: (record, mimeType) => `images/${record.id()}/bar.${mimeType}`,
         }),
         uploadFeature({
           componentLoader,
@@ -517,7 +519,7 @@ const options: AdminJSOptions = {
             },
           },
           properties: {
-            key: ' meetingsAndEventsImageUrl',
+            key: 'meetingsAndEventsImageUrl',
             file: 'uploadImageMeetingsAndEvents',
             mimeType: 'mimeTypeMeetingsAndEvents',
             bucket: 'bucketMeetingsAndEvents',
@@ -571,6 +573,28 @@ const options: AdminJSOptions = {
             filesToDelete: 'filesToDeleteKidsEntertainmentImageUrl',
           },
           uploadPath: (record, mimeType) => `images/${record.id()}/kidsEntertainmentImageUrl.${mimeType}`,
+        }),
+        uploadFeature({
+          componentLoader,
+          provider: {
+            aws: {
+              bucket: process.env.AWS_S3_BUCKET!,
+              region: process.env.AWS_REGION!,
+              accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+              secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+            },
+          },
+          properties: {
+            key: 'artImageUrl',
+            file: 'uploadImageArt',
+            mimeType: 'mimeTypeArt',
+            bucket: 'bucketArt',
+            size: 'sizeArt',
+            filename: 'filenameArt',
+            filePath: 'filePathArt',
+            filesToDelete: 'filesToDeleteArt',
+          },
+          uploadPath: (record, mimeType) => `images/${record.id()}/art.${mimeType}`,
         }),
       ],
     },
@@ -838,15 +862,15 @@ const options: AdminJSOptions = {
               secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
             },
           },
-            properties: {
-              key: 'winePageImageSecond',
-              file: 'uploadImageWineSecond',
-              mimeType: 'mimeUploadImageWineSecond',
-              bucket: 'bucketWineSecond',
-              size: 'sizeWineSecond',
-              filename: 'filenameWineSecond',
-              filePath: 'filePathWineSecond',
-              filesToDelete: 'filesToDeleteWineSecond',
+          properties: {
+            key: 'winePageImageSecond',
+            file: 'uploadImageWineSecond',
+            mimeType: 'mimeUploadImageWineSecond',
+            bucket: 'bucketWineSecond',
+            size: 'sizeWineSecond',
+            filename: 'filenameWineSecond',
+            filePath: 'filePathWineSecond',
+            filesToDelete: 'filesToDeleteWineSecond',
           },
           uploadPath: (record, mimeType) => `images/${record.id()}.${mimeType}`,
         }),
