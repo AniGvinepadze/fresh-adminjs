@@ -21,6 +21,7 @@ import { KidsEntertainmentImage } from '../model/KidsEntertainmentImages.model.j
 import { MakrinetImage } from '../model/MakrineImages.model.js';
 import { MeetingImage } from '../model/MeetingsImages.js';
 import { AgroImages } from '../model/AgroImages.model.js';
+import { Further } from '../model/FurtherQuestion.model.js';
 
 const categoryResourceOptions: ResourceOptions = {
   properties: {
@@ -36,7 +37,13 @@ const PostResourceOptions: ResourceOptions = {
     },
   },
 };
-
+const FurtherResourceOptions: ResourceOptions = {
+  properties: {
+    imageUrl: {
+      isVisible: { list: true, filter: false, show: true, edit: false },
+    },
+  },
+};
 const HomeResourceOptions: ResourceOptions = {
   properties: {
     hero_imageUrl: {
@@ -315,6 +322,32 @@ const options: AdminJSOptions = {
     {
       resource: Post,
       options: PostResourceOptions,
+      features: [
+        uploadFeature({
+          componentLoader,
+          provider: {
+            aws: {
+              bucket: process.env.AWS_S3_BUCKET!,
+              region: process.env.AWS_REGION!,
+              accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+              secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+            },
+          },
+          properties: {
+            key: 'imageUrl',
+            file: 'uploadImage',
+            mimeType: 'mimeType',
+            bucket: 'bucket',
+            size: 'size',
+            filename: 'filename',
+          },
+          uploadPath: (record, mimeType) => `posts/${record.id()}.${mimeType}`,
+        }),
+      ],
+    },
+    {
+      resource: Further,
+      options: FurtherResourceOptions,
       features: [
         uploadFeature({
           componentLoader,

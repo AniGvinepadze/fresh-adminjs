@@ -16,6 +16,7 @@ import { Wine } from '../model/wine.model.js';
 import { HomeRooms } from '../model/HomeRooms.model.js';
 import { KidsEntertainmentImage } from '../model/KidsEntertainmentImages.model.js';
 import { MeetingImage } from '../model/MeetingsImages.js';
+import { Further } from '../model/FurtherQuestion.model.js';
 
 const apiRouter = express.Router();
 
@@ -249,6 +250,29 @@ apiRouter.get('/kids-entertainmentimgs', async (req, res) => {
     res.json(responseData);
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch kids entertainment data' });
+  }
+});
+apiRouter.get('/further', async (req, res) => {
+  const { lang } = req.query;
+  const language = lang === 'ge' ? 'ge' : 'en';
+  
+  try {
+    const furtherData = await Further.find({}).lean();
+
+    const responseData = furtherData.map((item) => ({
+      further_title: item[`further_title_${language}`],
+
+      further_about_team: item[`further_about_team_${language}`],
+
+      further_getInTouch: item[`further_getInTouch_${language}`],
+
+      further_email: item.further_email,
+      further_phone: item.further_phone,
+    }));
+
+    res.json(responseData);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch further data' });
   }
 });
 apiRouter.get('/meetings-events', async (req, res) => {
