@@ -244,7 +244,7 @@ apiRouter.get('/kids-entertainmentimgs', async (req, res) => {
       imageUrl: item.imageUrl,
       secondImageUrl: item.secondImageUrl,
       thirdImageUrl: item.thirdImageUrl,
-      fourthImageUrl: item.fourthImageUrl
+      fourthImageUrl: item.fourthImageUrl,
     }));
     console.log(responseData);
     res.json(responseData);
@@ -255,7 +255,7 @@ apiRouter.get('/kids-entertainmentimgs', async (req, res) => {
 apiRouter.get('/further', async (req, res) => {
   const { lang } = req.query;
   const language = lang === 'ge' ? 'ge' : 'en';
-  
+
   try {
     const furtherData = await Further.find({}).lean();
 
@@ -376,9 +376,21 @@ apiRouter.get('/blog', async (req, res) => {
 });
 
 apiRouter.get('/contact', async (req, res) => {
+  const { lang } = req.query;
+  const language = lang === 'ge' ? 'ge' : 'en';
+
   try {
-    const contact = await Contact.findOne({}).lean();
-    res.json(contact);
+    const contactData = await Contact.find({}).lean();
+
+    const responseData = contactData.map((item) => ({
+      experience_title: item[`experience_title_${language}`],
+
+      experience_description: item[`experience_description_${language}`],
+
+      imageUrl: item.imageUrl,
+    }));
+
+    res.json(responseData);
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch contact data' });
   }
