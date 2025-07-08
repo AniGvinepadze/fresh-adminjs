@@ -15,6 +15,7 @@ import { Rooms } from '../model/rooms.model.js';
 import { Wine } from '../model/wine.model.js';
 import { HomeRooms } from '../model/HomeRooms.model.js';
 import { KidsEntertainmentImage } from '../model/KidsEntertainmentImages.model.js';
+import { MeetingImage } from '../model/MeetingsImages.js';
 
 const apiRouter = express.Router();
 
@@ -256,10 +257,36 @@ apiRouter.get('/meetings-events', async (req, res) => {
       conference_rooms_title: event[`conference_rooms_title_${language}`],
       conference_rooms_section_little_description: event[`conference_rooms_section_little_description_${language}`],
       conference_rooms_section_description: event[`conference_rooms_section_description_${language}`],
-
+      spaces_meeting_room: event[`spaces_meeting_room_${language}`],
+      spaces_boardroom: event[`spaces_boardroom_${language}`],
+      spaces_ballroom: event[`spaces_ballroom_${language}`],
+      meeting_room_iliauri: event[`meeting_room_iliauri_${language}`],
+      meeting_room_kamara: event[`meeting_room_kamara_${language}`],
+      kamara_iliauri: event[`kamara_iliauri_${language}`],
+      boardroom_krebuli_room: event[`boardroom_krebuli_room_${language}`],
+      ballroom_alazani_hall: event[`ballroom_alazani_hall_${language}`],
       conferenceImageUrl: event.conferenceImageUrl,
       artWorkImageUrl: event.artWorkImageUrl,
       conferenceRoomsImageUrl: event.conferenceRoomsImageUrl,
+    }));
+
+    res.json(responseData);
+  } catch (error) {
+    console.error('Failed to fetch meeting events:', error);
+    res.status(500).json({ error: 'Failed to fetch meeting events' });
+  }
+});
+apiRouter.get('/meetings-eventsImg', async (req, res) => {
+  const { lang } = req.query;
+  const language = lang === 'ge' ? 'ge' : 'en';
+
+  try {
+    const meetingEvents = await MeetingImage.find({}).lean();
+    const responseData = meetingEvents.map((event) => ({
+      imageUrl: event.imageUrl,
+      secondImageUrl: event.secondImageUrl,
+      thirdImageUrl: event.thirdImageUrl,
+      fourthImageUrl: event.fourthImageUrl,
     }));
 
     res.json(responseData);

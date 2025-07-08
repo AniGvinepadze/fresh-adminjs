@@ -97,29 +97,25 @@ const RestaurantBarResourceOptions: ResourceOptions = {
     logoImageUrl: {
       isVisible: { list: true, filter: false, show: true, edit: false },
     },
-        mainImageUrl: {
+    mainImageUrl: {
       isVisible: { list: true, filter: false, show: true, edit: false },
     },
-    
-        makrineRestaurantImageUrl: {
+
+    makrineRestaurantImageUrl: {
       isVisible: { list: true, filter: false, show: true, edit: false },
     },
-    
-        restaurantBarImageUrl: {
+
+    restaurantBarImageUrl: {
       isVisible: { list: true, filter: false, show: true, edit: false },
     },
-    
-        lobbyImageUrl: {
+
+    lobbyImageUrl: {
       isVisible: { list: true, filter: false, show: true, edit: false },
     },
-    
-        poolImageUrl: {
+
+    poolImageUrl: {
       isVisible: { list: true, filter: false, show: true, edit: false },
     },
-    
-  
-    
-    
   },
 };
 const kidsEntertainmentResourceOptions: ResourceOptions = {
@@ -662,7 +658,7 @@ const options: AdminJSOptions = {
           },
           uploadPath: (record, mimeType) => `images/${record.id()}/logo.${mimeType}`,
         }),
-          uploadFeature({
+        uploadFeature({
           componentLoader,
           provider: {
             aws: {
@@ -684,7 +680,7 @@ const options: AdminJSOptions = {
           },
           uploadPath: (record, mimeType) => `images/${record.id()}/restaurantBar.${mimeType}`,
         }),
-          uploadFeature({
+        uploadFeature({
           componentLoader,
           provider: {
             aws: {
@@ -706,7 +702,7 @@ const options: AdminJSOptions = {
           },
           uploadPath: (record, mimeType) => `images/${record.id()}/lobby.${mimeType}`,
         }),
-          uploadFeature({
+        uploadFeature({
           componentLoader,
           provider: {
             aws: {
@@ -728,7 +724,7 @@ const options: AdminJSOptions = {
           },
           uploadPath: (record, mimeType) => `images/${record.id()}/pool.${mimeType}`,
         }),
-          uploadFeature({
+        uploadFeature({
           componentLoader,
           provider: {
             aws: {
@@ -750,7 +746,7 @@ const options: AdminJSOptions = {
           },
           uploadPath: (record, mimeType) => `images/${record.id()}/main.${mimeType}`,
         }),
-          uploadFeature({
+        uploadFeature({
           componentLoader,
           provider: {
             aws: {
@@ -859,14 +855,14 @@ const options: AdminJSOptions = {
             },
           },
           properties: {
-            key: '  conferenceRoomsImageUrl',
+            key: 'conferenceRoomsImageUrl',
             file: 'uploadImageConferenceRooms',
             mimeType: 'mimeTypeConferenceRooms',
             bucket: 'bucketConferenceRooms',
             size: 'sizeConferenceRooms',
             filename: 'filenameConferenceRooms',
-            filePath: 'conferenceRoomsImagePath',
-            filesToDelete: 'conferenceRoomsImageDelete',
+            filePath: 'ImagePathConferenceRooms',
+            filesToDelete: 'ImageDeleteConferenceRooms',
           },
           uploadPath: (record, mimeType) => `images/${record.id()}/conferenceRooms.${mimeType}`,
         }),
