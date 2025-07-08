@@ -1,12 +1,16 @@
 import mongoose, { Document, model, Schema } from 'mongoose';
 
 export interface SpaWellness extends mongoose.Document {
-  wellness_and_fitness_title_en?: string;
-  wellness_and_fitness_title_ge?: string;
-  wellness_and_fitness_section_little_description_en?: string;
-  wellness_and_fitness_section_little_description_ge?: string;
-  wellness_and_fitness_section_description_en?: string;
-  wellness_and_fitness_section_description_ge?: string;
+  our_facilities_en?: string;
+  our_facilities_ge?: string;
+  our_facilities_spa_en?: string;
+  our_facilities_spa_ge?: string;
+  our_facilities_heated_indoor_pool_en?: string;
+  our_facilities_heated_indoor_pool_ge?: string;
+  our_facilities_outdoor_pool_en?: string;
+  our_facilities_outdoor_pool_ge?: string;
+  our_facilities_gym_en?: string;
+  our_facilities_gym_ge?: string;
   spa_and_wellness_title_en?: string;
   spa_and_wellness_title_ge?: string;
   spa_and_wellness_section_little_description_en?: string;
@@ -27,26 +31,44 @@ export interface SpaWellness extends mongoose.Document {
   out_door_pool_section_description_ge?: string;
   in_door_pool_section_description_en?: string;
   in_door_pool_section_description_ge?: string;
-  imageUrl?: string;
+  firstSpaImageUrl?: string;
+  secondSpaImageUrl?: string;
+  thirdSpaImageUrl?: string;
+  firstPoolImageUrl?: string;
+  secondPoolImageUrl?: string;
+  thirdPoolImageUrl?: string;
+  menuImgUrl?: string;
 }
 
 export const SpaWellnessSchema = new Schema<SpaWellness>({
-  wellness_and_fitness_title_en: {
+  our_facilities_en: {
     type: String,
   },
-  wellness_and_fitness_title_ge: {
+  our_facilities_ge: {
     type: String,
   },
-  wellness_and_fitness_section_little_description_en: {
+  our_facilities_spa_en: {
     type: String,
   },
-  wellness_and_fitness_section_little_description_ge: {
+  our_facilities_spa_ge: {
     type: String,
   },
-  wellness_and_fitness_section_description_en: {
+  our_facilities_heated_indoor_pool_en: {
     type: String,
   },
-  wellness_and_fitness_section_description_ge: {
+  our_facilities_heated_indoor_pool_ge: {
+    type: String,
+  },
+  our_facilities_outdoor_pool_en: {
+    type: String,
+  },
+  our_facilities_outdoor_pool_ge: {
+    type: String,
+  },
+  our_facilities_gym_en: {
+    type: String,
+  },
+  our_facilities_gym_ge: {
     type: String,
   },
   spa_and_wellness_title_en: {
@@ -109,7 +131,25 @@ export const SpaWellnessSchema = new Schema<SpaWellness>({
   in_door_pool_section_description_ge: {
     type: String,
   },
-  imageUrl: {
+  firstSpaImageUrl: {
+    type: String,
+  },
+  secondSpaImageUrl: {
+    type: String,
+  },
+  thirdSpaImageUrl: {
+    type: String,
+  },
+  firstPoolImageUrl: {
+    type: String,
+  },
+  secondPoolImageUrl: {
+    type: String,
+  },
+  thirdPoolImageUrl: {
+    type: String,
+  },
+  menuImgUrl: {
     type: String,
   },
 });

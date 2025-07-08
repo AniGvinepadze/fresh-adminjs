@@ -156,7 +156,25 @@ const meetingsEventsResourceOptions: ResourceOptions = {
 };
 const SpaWellnesResourceOptions: ResourceOptions = {
   properties: {
-    imageUrl: {
+    firstSpaImageUrl: {
+      isVisible: { list: true, filter: false, show: true, edit: false },
+    },
+    secondSpaImageUrl: {
+      isVisible: { list: true, filter: false, show: true, edit: false },
+    },
+    thirdSpaImageUrl: {
+      isVisible: { list: true, filter: false, show: true, edit: false },
+    },
+    firstPoolImageUrl: {
+      isVisible: { list: true, filter: false, show: true, edit: false },
+    },
+    secondPoolImageUrl: {
+      isVisible: { list: true, filter: false, show: true, edit: false },
+    },
+    thirdPoolImageUrl: {
+      isVisible: { list: true, filter: false, show: true, edit: false },
+    },
+    menuImgUrl: {
       isVisible: { list: true, filter: false, show: true, edit: false },
     },
   },
@@ -883,14 +901,155 @@ const options: AdminJSOptions = {
             },
           },
           properties: {
-            key: 'imageUrl',
-            file: 'uploadImage',
-            mimeType: 'mimeType',
-            bucket: 'bucket',
-            size: 'size',
-            filename: 'filename',
+            key: 'firstSpaImageUrl',
+            file: 'uploadImagefirstSpa',
+            mimeType: 'mimeTypefirstSpa',
+            bucket: 'bucketfirstSpa',
+            size: 'sizefirstSpa',
+            filename: 'filenamefirstSpa',
+
+            filePath: 'ImagePath firstSpa',
+            filesToDelete: 'ImageDeletefilenamefirstSpa',
           },
-          uploadPath: (record, mimeType) => `images/${record.id()}.${mimeType}`,
+          uploadPath: (record, mimeType) => `images/${record.id()}/firstSpa.${mimeType}`,
+        }),
+        uploadFeature({
+          componentLoader,
+          provider: {
+            aws: {
+              bucket: process.env.AWS_S3_BUCKET!,
+              region: process.env.AWS_REGION!,
+              accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+              secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+            },
+          },
+          properties: {
+            key: 'secondSpaImageUrl',
+            file: 'uploadImagesecondSpa',
+            mimeType: 'mimeTypesecondSpa',
+            bucket: 'bucketsecondSpa',
+            size: 'sizesecondSpa',
+            filename: 'filenamesecondSpa',
+
+            filePath: 'ImagePath secondSpa',
+            filesToDelete: 'ImageDeletefilenamesecondSpa',
+          },
+          uploadPath: (record, mimeType) => `images/${record.id()}/secondSpa.${mimeType}`,
+        }),
+        uploadFeature({
+          componentLoader,
+          provider: {
+            aws: {
+              bucket: process.env.AWS_S3_BUCKET!,
+              region: process.env.AWS_REGION!,
+              accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+              secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+            },
+          },
+          properties: {
+            key: 'thirdSpaImageUrl',
+            file: 'uploadImagethirdSpa',
+            mimeType: 'mimeTypethirdSpa',
+            bucket: 'bucketthirdSpa',
+            size: 'sizethirdSpa',
+            filename: 'filenamethirdSpa',
+
+            filePath: 'ImagePath thirdSpa',
+            filesToDelete: 'ImageDeletefilenamethirdSpa',
+          },
+          uploadPath: (record, mimeType) => `images/${record.id()}/thirdSpa.${mimeType}`,
+        }),
+        uploadFeature({
+          componentLoader,
+          provider: {
+            aws: {
+              bucket: process.env.AWS_S3_BUCKET!,
+              region: process.env.AWS_REGION!,
+              accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+              secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+            },
+          },
+          properties: {
+            key: 'firstPoolImageUrl',
+            file: 'uploadImagefirstPool',
+            mimeType: 'mimeTypefirstPool',
+            bucket: 'bucketfirstPool',
+            size: 'sizefirstPool',
+            filename: 'filenamefirstPool',
+
+            filePath: 'ImagePath firstPool',
+            filesToDelete: 'ImageDeletefilenamefirstPool',
+          },
+          uploadPath: (record, mimeType) => `images/${record.id()}/firstPool.${mimeType}`,
+        }),
+        uploadFeature({
+          componentLoader,
+          provider: {
+            aws: {
+              bucket: process.env.AWS_S3_BUCKET!,
+              region: process.env.AWS_REGION!,
+              accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+              secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+            },
+          },
+          properties: {
+            key: 'secondPoolImageUrl',
+            file: 'uploadImagesecondPool',
+            mimeType: 'mimeTypesecondPool',
+            bucket: 'bucketsecondPool',
+            size: 'sizesecondPool',
+            filename: 'filenamesecondPool',
+
+            filePath: 'ImagePath secondPool',
+            filesToDelete: 'ImageDeletefilenamesecondPool',
+          },
+          uploadPath: (record, mimeType) => `images/${record.id()}/secondPool.${mimeType}`,
+        }),
+        uploadFeature({
+          componentLoader,
+          provider: {
+            aws: {
+              bucket: process.env.AWS_S3_BUCKET!,
+              region: process.env.AWS_REGION!,
+              accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+              secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+            },
+          },
+          properties: {
+            key: 'thirdPoolImageUrl',
+            file: 'uploadImagethirdPool',
+            mimeType: 'mimeTypethirdPool',
+            bucket: 'bucketthirdPool',
+            size: 'sizethirdPool',
+            filename: 'filenamethirdPool',
+
+            filePath: 'ImagePath thirdPool',
+            filesToDelete: 'ImageDeletefilenamethirdPool',
+          },
+          uploadPath: (record, mimeType) => `images/${record.id()}/thirdPool.${mimeType}`,
+        }),
+        uploadFeature({
+          componentLoader,
+          provider: {
+            aws: {
+              bucket: process.env.AWS_S3_BUCKET!,
+              region: process.env.AWS_REGION!,
+              accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+              secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+            },
+          },
+          properties: {
+            key: 'menuImgUrl',
+            file: 'uploadImagemenu',
+            mimeType: 'mimeTypemenu',
+            bucket: 'bucketmenu',
+            size: 'sizemenu',
+            filename: 'filenamemenu',
+
+            filePath: 'ImagePath menu',
+            filesToDelete: 'ImageDeletefilenamemenu',
+          },
+          uploadPath: (record, mimeType) => `images/${record.id()}/menu.${mimeType}`,
         }),
       ],
     },

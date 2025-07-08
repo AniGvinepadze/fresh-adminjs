@@ -297,9 +297,37 @@ apiRouter.get('/meetings-eventsImg', async (req, res) => {
 });
 
 apiRouter.get('/spa-wellness', async (req, res) => {
+  const { lang } = req.query;
+  const language = lang === 'ge' ? 'ge' : 'en';
   try {
     const spaWellness = await SpaWellness.find({}).lean();
-    res.json(spaWellness);
+    const responseData = spaWellness.map((data) => ({
+      our_facilities: data[`our_facilities_${language}`],
+      our_facilities_spa: data[`our_facilities_spa_${language}`],
+      our_facilities_heated_indoor_pool: data[`our_facilities_heated_indoor_pool_${language}`],
+      our_facilities_outdoor_pool: data[`our_facilities_outdoor_pool_${language}`],
+      our_facilities_gym: data[`our_facilities_gym_${language}`],
+      spa_and_wellness_title: data[`spa_and_wellness_title_${language}`],
+      spa_and_wellness_section_little_description: data[`spa_and_wellness_section_little_description_${language}`],
+      spa_and_wellness_section_description: data[`spa_and_wellness_section_description_${language}`],
+      spa_and_wellness_section_about_room: data[`spa_and_wellness_section_about_room_${language}`],
+      spa_and_wellness_section_menu: data[`spa_and_wellness_section_menu_${language}`],
+      pool_title: data[`pool_title_${language}`],
+      pool_section_little_description: data[`pool_section_little_description_${language}`],
+      pool_section_description: data[`pool_section_description_${language}`],
+      out_door_pool_section_description: data[`out_door_pool_section_description_${language}`],
+      in_door_pool_section_description: data[`in_door_pool_section_description_${language}`],
+
+      firstSpaImageUrl: data.firstSpaImageUrl,
+      secondSpaImageUrl: data.secondSpaImageUrl,
+      thirdSpaImageUrl: data.thirdSpaImageUrl,
+      firstPoolImageUrl: data.firstPoolImageUrl,
+      secondPoolImageUrl: data.secondPoolImageUrl,
+      thirdPoolImageUrl: data.thirdPoolImageUrl,
+      menuImgUrl: data.menuImgUrl,
+    }));
+
+    res.json(responseData);
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch spa & wellness data' });
   }
