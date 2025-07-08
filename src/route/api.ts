@@ -169,7 +169,6 @@ apiRouter.get('/restaurantbar', async (req, res) => {
   }
 });
 
-
 apiRouter.get('/services', async (req, res) => {
   const { lang } = req.query;
   const language = lang === 'ge' ? 'ge' : 'en';
@@ -242,11 +241,31 @@ apiRouter.get('/kids-entertainmentimgs', async (req, res) => {
   }
 });
 apiRouter.get('/meetings-events', async (req, res) => {
+  const { lang } = req.query;
+  const language = lang === 'ge' ? 'ge' : 'en';
+
   try {
-    const meetingsEvents = await MeetingsEvent.find({}).lean();
-    res.json(meetingsEvents);
+    const meetingEvents = await MeetingsEvent.find({}).lean();
+    const responseData = meetingEvents.map((event) => ({
+      conference_ballroom_title: event[`conference_ballroom_title_${language}`],
+      conference_ballroom_section_little_description:
+        event[`conference_ballroom_section_little_description_${language}`],
+      conference_ballroom_section_description: event[`conference_ballroom_section_description_${language}`],
+
+      spaces_title: event[`spaces_title_${language}`],
+      conference_rooms_title: event[`conference_rooms_title_${language}`],
+      conference_rooms_section_little_description: event[`conference_rooms_section_little_description_${language}`],
+      conference_rooms_section_description: event[`conference_rooms_section_description_${language}`],
+
+      conferenceImageUrl: event.conferenceImageUrl,
+      artWorkImageUrl: event.artWorkImageUrl,
+      conferenceRoomsImageUrl: event.conferenceRoomsImageUrl,
+    }));
+
+    res.json(responseData);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch meetings & events data' });
+    console.error('Failed to fetch meeting events:', error);
+    res.status(500).json({ error: 'Failed to fetch meeting events' });
   }
 });
 
