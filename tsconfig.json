@@ -17,9 +17,10 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "types": ["node"],
-    "lib": ["ES2021", "ES2021.Promise", "ES2021.String"],
-    "strict": false
+    "lib": ["ES2021", "DOM"],
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "moduleDetection": "force"
   },
   "exclude": ["node_modules", "dist"],
   "include": ["src/**/*"]
