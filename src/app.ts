@@ -7,6 +7,8 @@ import options from './admin/options.js';
 import initializeDb from './db/index.js';
 import * as AdminJSMongoose from '@adminjs/mongoose';
 import apiRouter from './route/api.js';
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 AdminJS.registerAdapter({
   Resource: AdminJSMongoose.Resource,
