@@ -21,10 +21,14 @@ const start = async () => {
   await initializeDb();
 
   // Set up CORS
-  const corsOptions = {
-    origin: ['http://localhost:3000', 'https://www.pabellon.ge/'],
-    credentials: true,
-  };
+const corsOptions = {
+  origin: [
+    // 'http://localhost:3000',
+    process.env.FRONT_URL
+  ],
+  credentials: true,
+};
+
   app.use(cors(corsOptions));
   console.log("first")
 
