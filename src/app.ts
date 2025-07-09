@@ -13,7 +13,7 @@ AdminJS.registerAdapter({
   Database: AdminJSMongoose.Database,
 });
 
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || "https://pabellon-anis-projects-e2dd7ff7.vercel.app/";
 
 const start = async () => {
   const app = express();
