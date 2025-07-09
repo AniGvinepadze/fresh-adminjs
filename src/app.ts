@@ -21,6 +21,7 @@ const start = async () => {
 
   await initializeDb();
 
+  
   const corsOptions = {
     origin: ['http://localhost:3000', process.env.FRONT_URL, 'https://pabellon-anis-projects-e2dd7ff7.vercel.app/'],
     credentials: true,
