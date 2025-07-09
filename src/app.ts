@@ -9,7 +9,6 @@ import * as AdminJSMongoose from '@adminjs/mongoose';
 import apiRouter from './route/api.js';
 import * as dotenv from 'dotenv';
 dotenv.config();
-
 AdminJS.registerAdapter({
   Resource: AdminJSMongoose.Resource,
   Database: AdminJSMongoose.Database,
