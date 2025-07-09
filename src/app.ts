@@ -26,6 +26,7 @@ const start = async () => {
     credentials: true,
   };
   app.use(cors(corsOptions));
+  console.log("first")
 
   // Set up API routes
   app.use('/api', apiRouter);
