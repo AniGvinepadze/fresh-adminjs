@@ -1,23 +1,17 @@
 {
   "version": 2,
+
   "builds": [
     {
-      "src": "dist/app.js",
-      "use": "@vercel/node",
-      "config": {
-        "includeFiles": ["dist/**/*"]
-      }
-    },
-    {
-      "src": "dist/public/**/*",
-      "use": "@vercel/static",
-      "config": {
-        "outputDirectory": "dist/public"
-      }
+      "src": "dist/main.js",
+      "use": "@vercel/node"
     }
   ],
   "routes": [
-    { "src": "/public/(.*)", "dest": "/dist/public/", "methods": ["GET"] },
-    { "src": "/(.*)", "dest": "/dist/app.js" }
+    {
+      "src": "/(.*)",
+      "dest": "dist/app.js",
+      "methods": ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"]
+    }
   ]
 }
