@@ -21,11 +21,17 @@ const start = async () => {
 
   await initializeDb();
 
+  // Set up CORS
   const corsOptions = {
-    origin: ['http://localhost:3000'],
+    origin: [
+      // 'http://localhost:3000',
+      process.env.FRONT_URL,
+    ],
     credentials: true,
   };
+
   app.use(cors(corsOptions));
+  console.log('first');
 
   app.use('/api', apiRouter);
   app.get('/', (req, res) => {
