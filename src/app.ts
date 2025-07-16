@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import AdminJS from 'adminjs';
 import { buildAuthenticatedRouter } from '@adminjs/express';
 import cors from 'cors';
@@ -8,6 +8,8 @@ import initializeDb from './db/index.js';
 import * as AdminJSMongoose from '@adminjs/mongoose';
 import apiRouter from './route/api.js';
 import * as dotenv from 'dotenv';
+import sendEmail from './mailer/mailer.js';
+
 dotenv.config();
 AdminJS.registerAdapter({
   Resource: AdminJSMongoose.Resource,
@@ -20,6 +22,9 @@ const start = async () => {
   const app = express();
 
   await initializeDb();
+
+  app.use(express.json());
+  app.use(express.urlencoded({ extended: true }));
 
   // Set up CORS
   const corsOptions = {
@@ -37,6 +42,30 @@ const start = async () => {
   app.get('/', (req, res) => {
     res.send('Hello World');
   });
+
+
+app.post('/contact', async (req: Request, res: Response) => {
+  const { name, guests, date, restaurant } = req.body;
+
+  if (!name || !guests || !date || !restaurant) {
+    return res.status(400).json({ error: 'ყველა ველი სავალდებულოა' });
+  }
+
+  const result = await sendEmail({
+    to: 'a.gvin3@gmail.com', 
+    subject: `Reservation Inquiry from ${name}`,
+    restaurant,
+    date,
+    guests,
+    userName: name,
+  });
+
+  if (result.success) {
+    res.json({ message: 'ელფოსტა წარმატებით გაიგზავნა' });
+  } else {
+    res.status(500).json({ error: 'ელფოსტის გაგზავნა ვერ მოხერხდა' });
+  }
+});
 
   const admin = new AdminJS(options);
 
@@ -62,9 +91,6 @@ const start = async () => {
   );
 
   app.use(admin.options.rootPath, router);
-
-  app.use(express.json());
-  app.use(express.urlencoded({ extended: true }));
 
   app.listen(port, () => {
     console.log(`AdminJS available at http://localhost:${port}${admin.options.rootPath}`);
