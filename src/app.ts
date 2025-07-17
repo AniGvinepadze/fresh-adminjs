@@ -43,29 +43,28 @@ const start = async () => {
     res.send('Hello World');
   });
 
+  app.post('/contact', async (req: Request, res: Response) => {
+    const { name, guests, date, restaurant } = req.body;
 
-app.post('/contact', async (req: Request, res: Response) => {
-  const { name, guests, date, restaurant } = req.body;
+    if (!name || !guests || !date || !restaurant) {
+      return res.status(400).json({ error: 'ყველა ველი სავალდებულოა' });
+    }
 
-  if (!name || !guests || !date || !restaurant) {
-    return res.status(400).json({ error: 'ყველა ველი სავალდებულოა' });
-  }
+    const result = await sendEmail({
+      to: 'info@pabellón.ge',
+      subject: `Reservation Inquiry from ${name}`,
+      restaurant,
+      date,
+      guests,
+      userName: name,
+    });
 
-  const result = await sendEmail({
-    to: 'a.gvin3@gmail.com', 
-    subject: `Reservation Inquiry from ${name}`,
-    restaurant,
-    date,
-    guests,
-    userName: name,
+    if (result.success) {
+      res.json({ message: 'ელფოსტა წარმატებით გაიგზავნა' });
+    } else {
+      res.status(500).json({ error: 'ელფოსტის გაგზავნა ვერ მოხერხდა' });
+    }
   });
-
-  if (result.success) {
-    res.json({ message: 'ელფოსტა წარმატებით გაიგზავნა' });
-  } else {
-    res.status(500).json({ error: 'ელფოსტის გაგზავნა ვერ მოხერხდა' });
-  }
-});
 
   const admin = new AdminJS(options);
 
