@@ -102,5 +102,20 @@ export const RestaurantBarSchema = new Schema({
     poolImageUrl: {
         type: String,
     },
+    menuImageUrl_en: {
+        type: String,
+    },
+    menuImageUrl_ge: {
+        type: String,
+    },
+    menuImageUrlSecondPart_en: {
+        type: String,
+    },
+    menuImageUrlSecondPart_ge: {
+        type: String,
+    },
+    menuLogoImageUrl: {
+        type: String
+    }
 });
 export const RestaurantBar = model('RestaurantBar', RestaurantBarSchema);

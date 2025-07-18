@@ -18,40 +18,12 @@ const port = process.env.PORT || 3001;
 const start = async () => {
     const app = express();
     await initializeDb();
-    app.use(express.json());
-    app.use(express.urlencoded({ extended: true }));
     const corsOptions = {
-        origin: [
-            process.env.FRONT_URL,
-        ],
+        origin: [process.env.FRONT_URL],
         credentials: true,
     };
     app.use(cors(corsOptions));
     console.log('first');
-    app.use('/api', apiRouter);
-    app.get('/', (req, res) => {
-        res.send('Hello World');
-    });
-    app.post('/contact', async (req, res) => {
-        const { name, guests, date, restaurant } = req.body;
-        if (!name || !guests || !date || !restaurant) {
-            return res.status(400).json({ error: 'ყველა ველი სავალდებულოა' });
-        }
-        const result = await sendEmail({
-            to: 'a.gvin3@gmail.com',
-            subject: `Reservation Inquiry from ${name}`,
-            restaurant,
-            date,
-            guests,
-            userName: name,
-        });
-        if (result.success) {
-            res.json({ message: 'ელფოსტა წარმატებით გაიგზავნა' });
-        }
-        else {
-            res.status(500).json({ error: 'ელფოსტის გაგზავნა ვერ მოხერხდა' });
-        }
-    });
     const admin = new AdminJS(options);
     if (process.env.NODE_ENV === 'production') {
         await admin.initialize();
@@ -69,6 +41,32 @@ const start = async () => {
         resave: true,
     });
     app.use(admin.options.rootPath, router);
+    app.use(express.json());
+    app.use(express.urlencoded({ extended: true }));
+    app.use('/api', apiRouter);
+    app.get('/', (req, res) => {
+        res.send('Hello World');
+    });
+    app.post('/contact', async (req, res) => {
+        const { name, guests, date, restaurant } = req.body;
+        if (!name || !guests || !date || !restaurant) {
+            return res.status(400).json({ error: 'ყველა ველი სავალდებულოა' });
+        }
+        const result = await sendEmail({
+            to: 'info@pabellón.ge',
+            subject: `Reservation Inquiry from ${name}`,
+            restaurant,
+            date,
+            guests,
+            userName: name,
+        });
+        if (result.success) {
+            res.json({ message: 'ელფოსტა წარმატებით გაიგზავნა' });
+        }
+        else {
+            res.status(500).json({ error: 'ელფოსტის გაგზავნა ვერ მოხერხდა' });
+        }
+    });
     app.listen(port, () => {
         console.log(`AdminJS available at http://localhost:${port}${admin.options.rootPath}`);
     });

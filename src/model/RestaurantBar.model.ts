@@ -35,6 +35,11 @@ export interface RestaurantBar extends Document {
   restaurantBarImageUrl?: string;
   lobbyImageUrl?: string;
   poolImageUrl?: string;
+  menuImageUrl_en?: string;
+  menuImageUrl_ge?: string;
+  menuImageUrlSecondPart_en?: string;
+  menuImageUrlSecondPart_ge?: string;
+  menuLogoImageUrl?:string
 }
 
 export const RestaurantBarSchema = new Schema<RestaurantBar>({
@@ -140,6 +145,21 @@ export const RestaurantBarSchema = new Schema<RestaurantBar>({
   poolImageUrl: {
     type: String,
   },
+  menuImageUrl_en: {
+    type: String,
+  },
+  menuImageUrl_ge: {
+    type: String,
+  },
+  menuImageUrlSecondPart_en: {
+    type: String,
+  },
+  menuImageUrlSecondPart_ge: {
+    type: String,
+  },
+  menuLogoImageUrl:{
+    type:String
+  }
 });
 
 export const RestaurantBar = model<RestaurantBar>('RestaurantBar', RestaurantBarSchema);

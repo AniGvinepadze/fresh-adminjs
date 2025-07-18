@@ -141,12 +141,15 @@ apiRouter.get('/restaurantbar', async (req, res) => {
             lobby_bar_description: bar[`lobby_bar_description_${language}`],
             pool_bar_title: bar[`pool_bar_title_${language}`],
             pool_bar_section_description: bar[`pool_bar_section_description_${language}`],
+            menuImageUrl: bar[`menuImageUrl_${language}`],
+            menuImageUrlSecondPart: bar[`menuImageUrlSecondPart_${language}`],
             logoImageUrl: bar['logoImageUrl'],
             mainImageUrl: bar['mainImageUrl'],
             makrineRestaurantImageUrl: bar['makrineRestaurantImageUrl'],
             restaurantBarImageUrl: bar['restaurantBarImageUrl'],
             lobbyImageUrl: bar['lobbyImageUrl'],
             poolImageUrl: bar['poolImageUrl'],
+            menuLogoImageUrl: bar['menuLogoImageUrl'],
         }));
         res.json(responseData);
     }

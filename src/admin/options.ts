@@ -123,6 +123,21 @@ const RestaurantBarResourceOptions: ResourceOptions = {
     poolImageUrl: {
       isVisible: { list: true, filter: false, show: true, edit: false },
     },
+    menuImageUrl_en: {
+      isVisible: { list: true, filter: false, show: true, edit: false },
+    },
+    menuImageUrl_ge: {
+      isVisible: { list: true, filter: false, show: true, edit: false },
+    },
+    menuImageUrlSecondPart_en: {
+      isVisible: { list: true, filter: false, show: true, edit: false },
+    },
+    menuImageUrlSecondPart_ge: {
+      isVisible: { list: true, filter: false, show: true, edit: false },
+    },
+     menuLogoImageUrl: {
+      isVisible: { list: true, filter: false, show: true, edit: false },
+    },
   },
 };
 const kidsEntertainmentResourceOptions: ResourceOptions = {
@@ -818,6 +833,116 @@ const options: AdminJSOptions = {
             filesToDelete: 'filesToDeletemakrineRestaurant',
           },
           uploadPath: (record, mimeType) => `images/${record.id()}/makrineRestaurant.${mimeType}`,
+        }),
+        uploadFeature({
+          componentLoader,
+          provider: {
+            aws: {
+              bucket: process.env.AWS_S3_BUCKET!,
+              region: process.env.AWS_REGION!,
+              accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+              secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+            },
+          },
+          properties: {
+            key: 'menuImageUrl_en',
+            file: 'uploadImagemenuImageUrl_en',
+            mimeType: 'mimeTypemenuImageUrl_en',
+            bucket: 'bucketmenuImageUrl_en',
+            size: 'sizemenuImageUrl_en',
+            filename: 'filenamemenuImageUrl_en',
+            filePath: 'filePathmenuImageUrl_en',
+            filesToDelete: 'filesToDeletemenuImageUrl_en',
+          },
+          uploadPath: (record, mimeType) => `images/${record.id()}/menuImageUrl_en.${mimeType}`,
+        }),
+        uploadFeature({
+          componentLoader,
+          provider: {
+            aws: {
+              bucket: process.env.AWS_S3_BUCKET!,
+              region: process.env.AWS_REGION!,
+              accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+              secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+            },
+          },
+          properties: {
+            key: 'menuImageUrl_ge',
+            file: 'uploadImagemenuImageUrl_ge',
+            mimeType: 'mimeTypemenuImageUrl_ge',
+            bucket: 'bucketmenuImageUrl_ge',
+            size: 'sizemenuImageUrl_ge',
+            filename: 'filenamemenuImageUrl_ge',
+            filePath: 'filePathmenuImageUrl_ge',
+            filesToDelete: 'filesToDeletemenuImageUrl_ge',
+          },
+          uploadPath: (record, mimeType) => `images/${record.id()}/menuImageUrl_ge.${mimeType}`,
+        }),
+        uploadFeature({
+          componentLoader,
+          provider: {
+            aws: {
+              bucket: process.env.AWS_S3_BUCKET!,
+              region: process.env.AWS_REGION!,
+              accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+              secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+            },
+          },
+          properties: {
+            key: 'menuImageUrlSecondPart_en',
+            file: 'uploadImagemenuImageUrlSecondPart_en',
+            mimeType: 'mimeTypemenuImageUrlSecondPart_en',
+            bucket: 'bucketmenuImageUrlSecondPart_en',
+            size: 'sizemenuImageUrlSecondPart_en',
+            filename: 'filenamemenuImageUrlSecondPart_en',
+            filePath: 'filePathmenuImageUrlSecondPart_en',
+            filesToDelete: 'filesToDeletemenuImageUrlSecondPart_en',
+          },
+          uploadPath: (record, mimeType) => `images/${record.id()}/  menuImageUrlSecondPart_en.${mimeType}`,
+        }),
+        uploadFeature({
+          componentLoader,
+          provider: {
+            aws: {
+              bucket: process.env.AWS_S3_BUCKET!,
+              region: process.env.AWS_REGION!,
+              accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+              secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+            },
+          },
+          properties: {
+            key: 'menuImageUrlSecondPart_ge',
+            file: 'uploadImagemenuImageUrlSecondPart_ge',
+            mimeType: 'mimeTypemenuImageUrlSecondPart_ge',
+            bucket: 'bucketmenuImageUrlSecondPart_ge',
+            size: 'sizemenuImageUrlSecondPart_ge',
+            filename: 'filenamemenuImageUrlSecondPart_ge',
+            filePath: 'filePathmenuImageUrlSecondPart_ge',
+            filesToDelete: 'filesToDeletemenuImageUrlSecondPart_ge',
+          },
+          uploadPath: (record, mimeType) => `images/${record.id()}/menuImageUrlSecondPart_ge.${mimeType}`,
+        }),
+          uploadFeature({
+          componentLoader,
+          provider: {
+            aws: {
+              bucket: process.env.AWS_S3_BUCKET!,
+              region: process.env.AWS_REGION!,
+              accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+              secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+            },
+          },
+          properties: {
+            key: 'menuLogoImageUrl',
+            file: 'uploadImagemenuLogoImageUrl',
+            mimeType: 'mimeTypemenuLogoImageUrl',
+            bucket: 'bucketmenuLogoImageUrl',
+            size: 'sizemenuLogoImageUrl',
+            filename: 'filenamemenuLogoImageUrl',
+            filePath: 'filePathmenuLogoImageUrl',
+            filesToDelete: 'filesToDeletemenuLogoImageUrl',
+          },
+          uploadPath: (record, mimeType) => `images/${record.id()}/menuLogoImageUrl.${mimeType}`,
         }),
       ],
     },

@@ -23,20 +23,45 @@ const start = async () => {
 
   await initializeDb();
 
-  app.use(express.json());
-  app.use(express.urlencoded({ extended: true }));
-
-  // Set up CORS
   const corsOptions = {
-    origin: [
-      // 'http://localhost:3000',
-      process.env.FRONT_URL,
-    ],
+    origin: [process.env.FRONT_URL],
     credentials: true,
   };
 
   app.use(cors(corsOptions));
+  
   console.log('first');
+
+  // Set up AdminJS before any other body parsers or API routes
+  const admin = new AdminJS(options);
+  
+  if (process.env.NODE_ENV === 'production') {
+    await admin.initialize();
+  } else {
+    admin.watch();
+  }
+
+  const router = buildAuthenticatedRouter(
+    admin,
+    {
+      cookiePassword: process.env.COOKIE_SECRET,
+      cookieName: 'adminjs',
+      provider,
+    },
+    null,
+    {
+      secret: process.env.COOKIE_SECRET,
+      saveUninitialized: true,
+      resave: true,
+    }
+  );
+
+  // AdminJS should come before body parsers
+  app.use(admin.options.rootPath, router);
+
+  // Now add body parsers
+  app.use(express.json());
+  app.use(express.urlencoded({ extended: true }));
 
   app.use('/api', apiRouter);
   app.get('/', (req, res) => {
@@ -65,31 +90,6 @@ const start = async () => {
       res.status(500).json({ error: 'ელფოსტის გაგზავნა ვერ მოხერხდა' });
     }
   });
-
-  const admin = new AdminJS(options);
-
-  if (process.env.NODE_ENV === 'production') {
-    await admin.initialize();
-  } else {
-    admin.watch();
-  }
-
-  const router = buildAuthenticatedRouter(
-    admin,
-    {
-      cookiePassword: process.env.COOKIE_SECRET,
-      cookieName: 'adminjs',
-      provider,
-    },
-    null,
-    {
-      secret: process.env.COOKIE_SECRET,
-      saveUninitialized: true,
-      resave: true,
-    }
-  );
-
-  app.use(admin.options.rootPath, router);
 
   app.listen(port, () => {
     console.log(`AdminJS available at http://localhost:${port}${admin.options.rootPath}`);
