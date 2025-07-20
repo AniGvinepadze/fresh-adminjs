@@ -42,6 +42,18 @@ export interface RestaurantBar extends Document {
   menuLogoImageUrl?:string
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
 export const RestaurantBarSchema = new Schema<RestaurantBar>({
   makrine_section_little_description_en: {
     type: String,
