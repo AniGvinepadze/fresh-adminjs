@@ -23,6 +23,11 @@ import { MeetingImage } from '../model/MeetingsImages.js';
 import { AgroImages } from '../model/AgroImages.model.js';
 import { Further } from '../model/FurtherQuestion.model.js';
 import { Header } from '../model/Header.model.js';
+import { BookHome } from '../model/BookHome.model.js';
+import { BookMakrine } from '../model/BookMakrine.model.js';
+import { BookServices } from '../model/BookServices.model.js';
+import { SearchRooms } from '../model/SearchRooms.model.js';
+import { Footer } from '../model/Footer.model.js';
 
 const categoryResourceOptions: ResourceOptions = {
   properties: {
@@ -136,7 +141,7 @@ const RestaurantBarResourceOptions: ResourceOptions = {
     menuImageUrlSecondPart_ge: {
       isVisible: { list: true, filter: false, show: true, edit: false },
     },
-     menuLogoImageUrl: {
+    menuLogoImageUrl: {
       isVisible: { list: true, filter: false, show: true, edit: false },
     },
   },
@@ -923,7 +928,7 @@ const options: AdminJSOptions = {
           },
           uploadPath: (record, mimeType) => `images/${record.id()}/menuImageUrlSecondPart_ge.${mimeType}`,
         }),
-          uploadFeature({
+        uploadFeature({
           componentLoader,
           provider: {
             aws: {
@@ -1742,7 +1747,12 @@ const options: AdminJSOptions = {
         }),
       ],
     },
-    {  resource: Header,}
+    { resource: Header },
+    { resource: BookHome },
+    { resource: BookMakrine },
+    { resource: BookServices },
+    { resource: SearchRooms },
+    { resource: Footer },
   ],
 };
 

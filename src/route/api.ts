@@ -485,7 +485,7 @@ apiRouter.get('/header', async (req, res) => {
       wine: header[`wine_${language}`],
       agro: header[`agro_${language}`],
       contact: header[`contact_${language}`],
-      imageUrl:header.imageUrl
+
     };
 
     res.json(responseData);
