@@ -206,6 +206,12 @@ apiRouter.get('/services', async (req, res) => {
 
       our_facilities_title: service[`our_facilities_title_${language}`],
 
+      // Add new facilities fields here
+      our_facilities_spa: service[`our_facilities_spa_${language}`],
+      our_facilities_indoorPool: service[`our_facilities_indoorPool_${language}`],
+      our_facilities_outdoorPool: service[`our_facilities_outdoorPool_${language}`],
+      our_facilities_gym: service[`our_facilities_gym_${language}`],
+
       kids_entertainment_title: service[`kids_entertainment_title_${language}`],
       kids_entertainment_section_little_description:
         service[`kids_entertainment_section_little_description_${language}`],
@@ -485,7 +491,6 @@ apiRouter.get('/header', async (req, res) => {
       wine: header[`wine_${language}`],
       agro: header[`agro_${language}`],
       contact: header[`contact_${language}`],
-
     };
 
     res.json(responseData);
@@ -496,7 +501,7 @@ apiRouter.get('/header', async (req, res) => {
 });
 apiRouter.get('/bookhome', async (req, res) => {
   const { lang } = req.query;
-  const language = lang === 'ge' ? 'ge' : 'en'; 
+  const language = lang === 'ge' ? 'ge' : 'en';
 
   try {
     const bookHome = await BookHome.findOne({}).lean();
@@ -508,7 +513,7 @@ apiRouter.get('/bookhome', async (req, res) => {
       bookBtn: bookHome[`bookBtn_${language}`],
     };
 
-    res.json(responseData); 
+    res.json(responseData);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Failed to fetch BookHome data' });
@@ -516,7 +521,7 @@ apiRouter.get('/bookhome', async (req, res) => {
 });
 apiRouter.get('/bookmakrine', async (req, res) => {
   const { lang } = req.query;
-  const language = lang === 'ge' ? 'ge' : 'en'; 
+  const language = lang === 'ge' ? 'ge' : 'en';
   try {
     const bookMakrine = await BookMakrine.findOne({}).lean();
 
@@ -529,7 +534,7 @@ apiRouter.get('/bookmakrine', async (req, res) => {
       name: bookMakrine[`name_${language}`],
     };
 
-    res.json(responseData); 
+    res.json(responseData);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Failed to fetch BookMakrine data' });
@@ -538,7 +543,7 @@ apiRouter.get('/bookmakrine', async (req, res) => {
 
 apiRouter.get('/bookservices', async (req, res) => {
   const { lang } = req.query;
-  const language = lang === 'ge' ? 'ge' : 'en'; 
+  const language = lang === 'ge' ? 'ge' : 'en';
 
   try {
     const bookServices = await BookServices.findOne({}).lean();
@@ -572,7 +577,7 @@ apiRouter.get('/searchrooms', async (req, res) => {
       bookBtn: searchRooms[`bookBtn_${language}`],
     };
 
-    res.json(responseData); 
+    res.json(responseData);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Failed to fetch SearchRooms data' });
