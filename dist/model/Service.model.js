@@ -72,6 +72,30 @@ export const ServicesSchema = new Schema({
     our_facilities_title_ge: {
         type: String,
     },
+    our_facilities_spa_en: {
+        type: String,
+    },
+    our_facilities_spa_ge: {
+        type: String,
+    },
+    our_facilities_indoorPool_en: {
+        type: String,
+    },
+    our_facilities_indoorPool_ge: {
+        type: String,
+    },
+    our_facilities_outdoorPool_en: {
+        type: String,
+    },
+    our_facilities_outdoorPool_ge: {
+        type: String,
+    },
+    our_facilities_gym_en: {
+        type: String,
+    },
+    our_facilities_gym_ge: {
+        type: String,
+    },
     kids_entertainment_title_en: {
         type: String,
     },

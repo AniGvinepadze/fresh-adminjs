@@ -22,6 +22,7 @@ import { MakrinetImage } from '../model/MakrineImages.model.js';
 import { MeetingImage } from '../model/MeetingsImages.js';
 import { AgroImages } from '../model/AgroImages.model.js';
 import { Further } from '../model/FurtherQuestion.model.js';
+import { Header } from '../model/Header.model.js';
 
 const categoryResourceOptions: ResourceOptions = {
   properties: {
@@ -1741,6 +1742,7 @@ const options: AdminJSOptions = {
         }),
       ],
     },
+    {  resource: Header,}
   ],
 };
 

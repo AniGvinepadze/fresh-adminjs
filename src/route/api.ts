@@ -17,6 +17,11 @@ import { HomeRooms } from '../model/HomeRooms.model.js';
 import { KidsEntertainmentImage } from '../model/KidsEntertainmentImages.model.js';
 import { MeetingImage } from '../model/MeetingsImages.js';
 import { Further } from '../model/FurtherQuestion.model.js';
+import { Header } from '../model/Header.model.js';
+import { BookHome } from '../model/BookHome.model.js';
+import { BookMakrine } from '../model/BookMakrine.model.js';
+import { BookServices } from '../model/BookServices.model.js';
+import { SearchRooms } from '../model/SearchRooms.model.js';
 
 const apiRouter = express.Router();
 
@@ -458,6 +463,119 @@ apiRouter.get('/wine', async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Failed to fetch wine data' });
+  }
+});
+apiRouter.get('/header', async (req, res) => {
+  const { lang } = req.query;
+  const language = lang === 'ge' ? 'ge' : 'en';
+
+  try {
+    const header = await Header.findOne({}).lean();
+
+    const responseData = {
+      home: header[`home_${language}`],
+      aboutUs: header[`aboutUs_${language}`],
+      rooms: header[`rooms_${language}`],
+      services: header[`services_${language}`],
+      experiences: header[`experiences_${language}`],
+      barsRestaurant: header[`barsRestaurant_${language}`],
+      meetingEvents: header[`meetingEvents_${language}`],
+      spaWellness: header[`spaWellness_${language}`],
+      kids: header[`kids_${language}`],
+      wine: header[`wine_${language}`],
+      agro: header[`agro_${language}`],
+      contact: header[`contact_${language}`],
+      imageUrl:header.imageUrl
+    };
+
+    res.json(responseData);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to fetch header data' });
+  }
+});
+apiRouter.get('/bookhome', async (req, res) => {
+  const { lang } = req.query;
+  const language = lang === 'ge' ? 'ge' : 'en'; 
+
+  try {
+    const bookHome = await BookHome.findOne({}).lean();
+
+    const responseData = {
+      book_title: bookHome[`book_title_${language}`],
+      check_in: bookHome[`check_in_${language}`],
+      check_out: bookHome[`check_out_${language}`],
+      bookBtn: bookHome[`bookBtn_${language}`],
+    };
+
+    res.json(responseData); 
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to fetch BookHome data' });
+  }
+});
+apiRouter.get('/bookmakrine', async (req, res) => {
+  const { lang } = req.query;
+  const language = lang === 'ge' ? 'ge' : 'en'; 
+  try {
+    const bookMakrine = await BookMakrine.findOne({}).lean();
+
+    const responseData = {
+      book_title: bookMakrine[`book_title_${language}`],
+      check_in: bookMakrine[`check_in_${language}`],
+      bookBtn: bookMakrine[`bookBtn_${language}`],
+      select_date: bookMakrine[`select_date_${language}`],
+      adults: bookMakrine[`adults_${language}`],
+      name: bookMakrine[`name_${language}`],
+    };
+
+    res.json(responseData); 
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to fetch BookMakrine data' });
+  }
+});
+
+apiRouter.get('/bookservices', async (req, res) => {
+  const { lang } = req.query;
+  const language = lang === 'ge' ? 'ge' : 'en'; 
+
+  try {
+    const bookServices = await BookServices.findOne({}).lean();
+
+    const responseData = {
+      book_title: bookServices[`book_title_${language}`],
+      check_in: bookServices[`check_in_${language}`],
+      bookBtn: bookServices[`bookBtn_${language}`],
+      select_date: bookServices[`select_date_${language}`],
+      adults: bookServices[`adults_${language}`],
+    };
+
+    res.json(responseData);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to fetch BookServices data' });
+  }
+});
+
+apiRouter.get('/searchrooms', async (req, res) => {
+  const { lang } = req.query;
+  const language = lang === 'ge' ? 'ge' : 'en';
+
+  try {
+    const searchRooms = await SearchRooms.findOne({}).lean();
+
+    const responseData = {
+      search_title: searchRooms[`search_title_${language}`],
+      check_in: searchRooms[`check_in_${language}`],
+      check_out: searchRooms[`check_out_${language}`],
+      bookBtn: searchRooms[`bookBtn_${language}`],
+    };
+
+    res.json(responseData); 
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to fetch SearchRooms data' });
   }
 });
 

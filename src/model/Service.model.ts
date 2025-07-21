@@ -25,6 +25,14 @@ export interface Services extends Document {
   wellness_and_fitness_section_description_ge?: string;
   our_facilities_title_en?: string;
   our_facilities_title_ge?: string;
+  our_facilities_spa_en?: string;
+  our_facilities_spa_ge?: string;
+  our_facilities_indoorPool_en?: string;
+  our_facilities_indoorPool_ge?: string;
+  our_facilities_outdoorPool_en?: string;
+  our_facilities_outdoorPool_ge?: string;
+  our_facilities_gym_en?: string;
+  our_facilities_gym_ge?: string;
   kids_entertainment_title_en?: string;
   kids_entertainment_title_ge?: string;
   kids_entertainment_section_little_description_en?: string;
@@ -112,6 +120,30 @@ export const ServicesSchema = new Schema<Services>({
     type: String,
   },
   our_facilities_title_ge: {
+    type: String,
+  },
+  our_facilities_spa_en: {
+    type: String,
+  },
+  our_facilities_spa_ge: {
+    type: String,
+  },
+  our_facilities_indoorPool_en: {
+    type: String,
+  },
+  our_facilities_indoorPool_ge: {
+    type: String,
+  },
+  our_facilities_outdoorPool_en: {
+    type: String,
+  },
+  our_facilities_outdoorPool_ge: {
+    type: String,
+  },
+  our_facilities_gym_en: {
+    type: String,
+  },
+  our_facilities_gym_ge: {
     type: String,
   },
   kids_entertainment_title_en: {
