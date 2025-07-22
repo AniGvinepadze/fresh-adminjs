@@ -22,6 +22,7 @@ import { BookHome } from '../model/BookHome.model.js';
 import { BookMakrine } from '../model/BookMakrine.model.js';
 import { BookServices } from '../model/BookServices.model.js';
 import { SearchRooms } from '../model/SearchRooms.model.js';
+import { Footer } from '../model/Footer.model.js';
 
 const apiRouter = express.Router();
 
