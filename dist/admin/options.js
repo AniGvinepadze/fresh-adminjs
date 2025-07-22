@@ -21,174 +21,11 @@ import { MeetingImage } from '../model/MeetingsImages.js';
 import { AgroImages } from '../model/AgroImages.model.js';
 import { Further } from '../model/FurtherQuestion.model.js';
 import { Header } from '../model/Header.model.js';
-const BookServicesResourceOptions = {
-    properties: {
-        book_title_en: {
-            isVisible: { list: true, show: true, edit: true },
-        },
-        book_title_ge: {
-            isVisible: { list: true, show: true, edit: true },
-        },
-        check_in_en: {
-            isVisible: { list: true, show: true, edit: true },
-        },
-        check_in_ge: {
-            isVisible: { list: true, show: true, edit: true },
-        },
-        bookBtn_en: {
-            isVisible: { list: true, show: true, edit: true },
-        },
-        bookBtn_ge: {
-            isVisible: { list: true, show: true, edit: true },
-        },
-        select_date_en: {
-            isVisible: { list: true, show: true, edit: true },
-        },
-        select_date_ge: {
-            isVisible: { list: true, show: true, edit: true },
-        },
-        adults_en: {
-            isVisible: { list: true, show: true, edit: true },
-        },
-        adults_ge: {
-            isVisible: { list: true, show: true, edit: true },
-        },
-    },
-};
-const BookMakrineResourceOptions = {
-    properties: {
-        book_title_en: {
-            isVisible: { list: true, show: true, edit: true },
-        },
-        book_title_ge: {
-            isVisible: { list: true, show: true, edit: true },
-        },
-        check_in_en: {
-            isVisible: { list: true, show: true, edit: true },
-        },
-        check_in_ge: {
-            isVisible: { list: true, show: true, edit: true },
-        },
-        bookBtn_en: {
-            isVisible: { list: true, show: true, edit: true },
-        },
-        bookBtn_ge: {
-            isVisible: { list: true, show: true, edit: true },
-        },
-        select_date_en: {
-            isVisible: { list: true, show: true, edit: true },
-        },
-        select_date_ge: {
-            isVisible: { list: true, show: true, edit: true },
-        },
-        adults_en: {
-            isVisible: { list: true, show: true, edit: true },
-        },
-        adults_ge: {
-            isVisible: { list: true, show: true, edit: true },
-        },
-    },
-};
-const SearchRoomsResourceOptions = {
-    properties: {
-        search_title_en: {
-            isVisible: { list: true, show: true, edit: true },
-        },
-        search_title_ge: {
-            isVisible: { list: true, show: true, edit: true },
-        },
-        check_in_en: {
-            isVisible: { list: true, show: true, edit: true },
-        },
-        check_in_ge: {
-            isVisible: { list: true, show: true, edit: true },
-        },
-        check_out_en: {
-            isVisible: { list: true, show: true, edit: true },
-        },
-        check_out_ge: {
-            isVisible: { list: true, show: true, edit: true },
-        },
-        bookBtn_en: {
-            isVisible: { list: true, show: true, edit: true },
-        },
-        bookBtn_ge: {
-            isVisible: { list: true, show: true, edit: true },
-        },
-    },
-};
-const BookHomeResourceOptions = {
-    properties: {
-        book_title_en: {
-            isVisible: { list: true, show: true, edit: true },
-        },
-        book_title_ge: {
-            isVisible: { list: true, show: true, edit: true },
-        },
-        check_in_en: {
-            isVisible: { list: true, show: true, edit: true },
-        },
-        check_in_ge: {
-            isVisible: { list: true, show: true, edit: true },
-        },
-        check_out_en: {
-            isVisible: { list: true, show: true, edit: true },
-        },
-        check_out_ge: {
-            isVisible: { list: true, show: true, edit: true },
-        },
-        bookBtn_en: {
-            isVisible: { list: true, show: true, edit: true },
-        },
-        bookBtn_ge: {
-            isVisible: { list: true, show: true, edit: true },
-        },
-    },
-};
-const FooterResourceOptions = {
-    properties: {
-        footer_text_en: {
-            isVisible: { list: true, show: true, edit: true },
-        },
-        footer_text_ge: {
-            isVisible: { list: true, show: true, edit: true },
-        },
-        contact_email: {
-            isVisible: { list: true, show: true, edit: true },
-        },
-        contact_phone: {
-            isVisible: { list: true, show: true, edit: true },
-        },
-    },
-};
-const HeaderResourceOptions = {
-    properties: {
-        home_en: {
-            isVisible: { list: true, show: true, edit: true },
-        },
-        home_ge: {
-            isVisible: { list: true, show: true, edit: true },
-        },
-        aboutUs_en: {
-            isVisible: { list: true, show: true, edit: true },
-        },
-        aboutUs_ge: {
-            isVisible: { list: true, show: true, edit: true },
-        },
-        rooms_en: {
-            isVisible: { list: true, show: true, edit: true },
-        },
-        rooms_ge: {
-            isVisible: { list: true, show: true, edit: true },
-        },
-        contact_en: {
-            isVisible: { list: true, show: true, edit: true },
-        },
-        contact_ge: {
-            isVisible: { list: true, show: true, edit: true },
-        },
-    },
-};
+import { BookHome } from '../model/BookHome.model.js';
+import { BookMakrine } from '../model/BookMakrine.model.js';
+import { BookServices } from '../model/BookServices.model.js';
+import { SearchRooms } from '../model/SearchRooms.model.js';
+import { Footer } from '../model/Footer.model.js';
 const categoryResourceOptions = {
     properties: {
         imageUrl: {
@@ -1890,6 +1727,11 @@ const options = {
             ],
         },
         { resource: Header },
+        { resource: BookHome },
+        { resource: BookMakrine },
+        { resource: BookServices },
+        { resource: SearchRooms },
+        { resource: Footer },
     ],
 };
 export default options;

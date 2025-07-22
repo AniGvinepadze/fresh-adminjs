@@ -181,6 +181,10 @@ apiRouter.get('/services', async (req, res) => {
             wellness_and_fitness_section_little_description: service[`wellness_and_fitness_section_little_description_${language}`],
             wellness_and_fitness_section_description: service[`wellness_and_fitness_section_description_${language}`],
             our_facilities_title: service[`our_facilities_title_${language}`],
+            our_facilities_spa: service[`our_facilities_spa_${language}`],
+            our_facilities_indoorPool: service[`our_facilities_indoorPool_${language}`],
+            our_facilities_outdoorPool: service[`our_facilities_outdoorPool_${language}`],
+            our_facilities_gym: service[`our_facilities_gym_${language}`],
             kids_entertainment_title: service[`kids_entertainment_title_${language}`],
             kids_entertainment_section_little_description: service[`kids_entertainment_section_little_description_${language}`],
             kids_entertainment_section_description: service[`kids_entertainment_section_description_${language}`],
@@ -192,6 +196,7 @@ apiRouter.get('/services', async (req, res) => {
             kidsEntertainmentImageUrl: service.kidsEntertainmentImageUrl,
             artImageUrl: service.artImageUrl,
         }));
+        console.log(responseData);
         res.json(responseData);
     }
     catch (error) {
@@ -210,7 +215,7 @@ apiRouter.get('/kids-entertainment', async (req, res) => {
             kids_entertainment_play_area: item[`kids_entertainment_play_area_${language}`],
             imageUrl: item.imageUrl,
         }));
-        res.json(kidsEntertainment);
+        res.json(responseData);
     }
     catch (error) {
         res.status(500).json({ error: 'Failed to fetch kids entertainment data' });
@@ -438,7 +443,6 @@ apiRouter.get('/header', async (req, res) => {
             wine: header[`wine_${language}`],
             agro: header[`agro_${language}`],
             contact: header[`contact_${language}`],
-            imageUrl: header.imageUrl
         };
         res.json(responseData);
     }

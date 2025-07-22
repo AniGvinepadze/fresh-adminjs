@@ -206,7 +206,7 @@ apiRouter.get('/services', async (req, res) => {
 
       our_facilities_title: service[`our_facilities_title_${language}`],
 
-      // Add new facilities fields here
+   
       our_facilities_spa: service[`our_facilities_spa_${language}`],
       our_facilities_indoorPool: service[`our_facilities_indoorPool_${language}`],
       our_facilities_outdoorPool: service[`our_facilities_outdoorPool_${language}`],
@@ -225,6 +225,8 @@ apiRouter.get('/services', async (req, res) => {
       kidsEntertainmentImageUrl: service.kidsEntertainmentImageUrl,
       artImageUrl: service.artImageUrl,
     }));
+
+    console.log(responseData)
 
     res.json(responseData);
   } catch (error) {
@@ -245,7 +247,7 @@ apiRouter.get('/kids-entertainment', async (req, res) => {
 
       imageUrl: item.imageUrl,
     }));
-    res.json(kidsEntertainment);
+    res.json(responseData);
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch kids entertainment data' });
   }

@@ -72,8 +72,5 @@ export const HeaderSchema = new Schema({
     contact_ge: {
         type: String,
     },
-    imageUrl: {
-        type: String,
-    },
 });
 export const Header = model('Header', HeaderSchema);
