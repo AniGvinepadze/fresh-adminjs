@@ -542,6 +542,38 @@ apiRouter.get('/bookmakrine', async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch BookMakrine data' });
   }
 });
+apiRouter.get('/footer', async (req, res) => {
+  const { lang } = req.query;
+  const language = lang === 'ge' ? 'ge' : 'en'; 
+
+  try {
+    const footerData = await Footer.findOne({}).lean(); 
+
+    if (!footerData) {
+      return res.status(404).json({ error: 'Footer data not found' });
+    }
+
+   
+    const responseData = {
+      contactUs: footerData[`contactUs_${language}`],
+      email: footerData[`email_${language}`],
+      phone: footerData[`phone_${language}`],
+      rooms: footerData[`rooms_${language}`],
+      home: footerData[`home_${language}`],
+      services: footerData[`services_${language}`],
+      restaurant: footerData[`restaurant_${language}`],
+      faqs: footerData[`faqs_${language}`],
+      instagram: footerData[`instagram_${language}`],
+      facebook: footerData[`facebook_${language}`],
+      linkedIn: footerData[`linkedIn_${language}`],
+    };
+
+    res.json(responseData); 
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to fetch footer data' });
+  }
+});
 
 apiRouter.get('/bookservices', async (req, res) => {
   const { lang } = req.query;
